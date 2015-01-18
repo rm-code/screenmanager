@@ -1,6 +1,6 @@
 --===============================================================================--
 --                                                                               --
--- Copyright (c) 2014 Robert Machmer                                             --
+-- Copyright (c) 2014 - 2015 Robert Machmer                                      --
 --                                                                               --
 -- This software is provided 'as-is', without any express or implied             --
 -- warranty. In no event will the authors be held liable for any damages         --
@@ -60,6 +60,8 @@ function Screen.new()
     function self:mousepressed(x, y, button) end
 
     function self:mousefocus(focus) end
+
+    function self:quit(dquit) end
 
     function self:isActive()
         return active;
