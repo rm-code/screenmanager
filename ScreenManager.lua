@@ -228,6 +228,14 @@ function ScreenManager.mousefocus(focus)
     ScreenManager.peek():mousefocus(focus);
 end
 
+---
+-- Reroute the quit callback to the currently active screen.
+-- @param dquit
+--
+function ScreenManager.quit(dquit)
+    ScreenManager.peek():quit(dquit);
+end
+
 -- ------------------------------------------------
 -- Setters
 -- ------------------------------------------------
