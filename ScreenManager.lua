@@ -20,17 +20,35 @@
 --                                                                               --
 --===============================================================================--
 
-local ScreenManager = {};
+local ScreenManager = {
+    _VERSION     = '1.2.1',
+    _DESCRIPTION = 'Screen/State Management for the LÖVE framework',
+    _URL         = 'https://bitbucket.org/rmcode/screenmanager/',
+};
 
 -- ------------------------------------------------
 -- Local Variables
 -- ------------------------------------------------
 
-local stack = {};
-local screens = {};
+local stack;
+local screens;
 
 -- ------------------------------------------------
--- Module Functions
+-- Private Functions
+-- ------------------------------------------------
+
+---
+-- Close and remove all screens from the stack.
+--
+local function clear()
+    for i = 1, #stack do
+        stack[i]:close();
+        stack[i] = nil;
+    end
+end
+
+-- ------------------------------------------------
+-- Public Functions
 -- ------------------------------------------------
 
 ---
@@ -41,7 +59,7 @@ local screens = {};
 --
 function ScreenManager.init(nscreens, screen)
     stack = {};
-    ScreenManager.setScreens(nscreens);
+    screens = nscreens;
     ScreenManager.push(screen);
 end
 
@@ -52,7 +70,7 @@ end
 -- @param nscreen
 --
 function ScreenManager.switch(screen)
-    ScreenManager.clear();
+    clear();
     ScreenManager.push(screen);
 end
 
@@ -110,16 +128,6 @@ function ScreenManager.pop()
         ScreenManager.peek():setActive(true);
     else
         error("Can't close the last screen. Use switch() to clear the screen manager and add a new screen.");
-    end
-end
-
----
--- Close and remove all screens from the stack.
---
-function ScreenManager.clear()
-    for i = 1, #stack do
-        stack[i]:close();
-        stack[i] = nil;
     end
 end
 
@@ -220,8 +228,6 @@ end
 
 ---
 -- Reroute the mousefocus callback to the currently active screen.
--- @param x
--- @param y
 -- @param button
 --
 function ScreenManager.mousefocus(focus)
@@ -234,19 +240,6 @@ end
 --
 function ScreenManager.quit(dquit)
     ScreenManager.peek():quit(dquit);
-end
-
--- ------------------------------------------------
--- Setters
--- ------------------------------------------------
-
----
--- Set a new table of screens from which to pick a new screen when
--- pushing / switching.
--- @param nscreens
---
-function ScreenManager.setScreens(nscreens)
-    screens = nscreens;
 end
 
 -- ------------------------------------------------
