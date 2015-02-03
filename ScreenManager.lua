@@ -30,7 +30,21 @@ local stack = {};
 local screens = {};
 
 -- ------------------------------------------------
--- Module Functions
+-- Private Functions
+-- ------------------------------------------------
+
+---
+-- Close and remove all screens from the stack.
+--
+local function clear()
+    for i = 1, #stack do
+        stack[i]:close();
+        stack[i] = nil;
+    end
+end
+
+-- ------------------------------------------------
+-- Public Functions
 -- ------------------------------------------------
 
 ---
@@ -52,7 +66,7 @@ end
 -- @param nscreen
 --
 function ScreenManager.switch(screen)
-    ScreenManager.clear();
+    clear();
     ScreenManager.push(screen);
 end
 
@@ -110,16 +124,6 @@ function ScreenManager.pop()
         ScreenManager.peek():setActive(true);
     else
         error("Can't close the last screen. Use switch() to clear the screen manager and add a new screen.");
-    end
-end
-
----
--- Close and remove all screens from the stack.
---
-function ScreenManager.clear()
-    for i = 1, #stack do
-        stack[i]:close();
-        stack[i] = nil;
     end
 end
 
