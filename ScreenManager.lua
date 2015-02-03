@@ -55,7 +55,7 @@ end
 --
 function ScreenManager.init(nscreens, screen)
     stack = {};
-    ScreenManager.setScreens(nscreens);
+    screens = nscreens;
     ScreenManager.push(screen);
 end
 
@@ -238,19 +238,6 @@ end
 --
 function ScreenManager.quit(dquit)
     ScreenManager.peek():quit(dquit);
-end
-
--- ------------------------------------------------
--- Setters
--- ------------------------------------------------
-
----
--- Set a new table of screens from which to pick a new screen when
--- pushing / switching.
--- @param nscreens
---
-function ScreenManager.setScreens(nscreens)
-    screens = nscreens;
 end
 
 -- ------------------------------------------------
