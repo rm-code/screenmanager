@@ -26,8 +26,8 @@ local ScreenManager = {};
 -- Local Variables
 -- ------------------------------------------------
 
-local stack = {};
-local screens = {};
+local stack;
+local screens;
 
 -- ------------------------------------------------
 -- Private Functions
