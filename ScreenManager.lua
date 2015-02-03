@@ -224,8 +224,6 @@ end
 
 ---
 -- Reroute the mousefocus callback to the currently active screen.
--- @param x
--- @param y
 -- @param button
 --
 function ScreenManager.mousefocus(focus)
