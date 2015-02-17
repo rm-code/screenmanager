@@ -235,6 +235,17 @@ function ScreenManager.mousefocus(focus)
 end
 
 ---
+-- Callback function triggered when the mouse is moved.
+-- @param x - Mouse x position.
+-- @param y - Mouse y position.
+-- @param dx - The amount moved along the x-axis since the last time love.mousemoved was called.
+-- @param dy - The amount moved along the y-axis since the last time love.mousemoved was called.
+--
+function ScreenManager.mousemoved(x, y, dx, dy)
+    ScreenManager.peek():mousemoved(x, y, dx, dy);
+end
+
+---
 -- Reroute the quit callback to the currently active screen.
 -- @param dquit
 --

@@ -61,6 +61,8 @@ function Screen.new()
 
     function self:mousefocus(focus) end
 
+    function self:mousemoved(x, y, dx, dy) end
+
     function self:quit(dquit) end
 
     function self:isActive()
