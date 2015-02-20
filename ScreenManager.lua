@@ -21,7 +21,7 @@
 --===============================================================================--
 
 local ScreenManager = {
-    _VERSION     = '1.2.1',
+    _VERSION     = '1.3.0',
     _DESCRIPTION = 'Screen/State Management for the LÖVE framework',
     _URL         = 'https://bitbucket.org/rmcode/screenmanager/',
 };
@@ -232,6 +232,17 @@ end
 --
 function ScreenManager.mousefocus(focus)
     ScreenManager.peek():mousefocus(focus);
+end
+
+---
+-- Callback function triggered when the mouse is moved.
+-- @param x - Mouse x position.
+-- @param y - Mouse y position.
+-- @param dx - The amount moved along the x-axis since the last time love.mousemoved was called.
+-- @param dy - The amount moved along the y-axis since the last time love.mousemoved was called.
+--
+function ScreenManager.mousemoved(x, y, dx, dy)
+    ScreenManager.peek():mousemoved(x, y, dx, dy);
 end
 
 ---
