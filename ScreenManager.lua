@@ -21,7 +21,7 @@
 --===============================================================================--
 
 local ScreenManager = {
-    _VERSION     = '1.3.1',
+    _VERSION     = '1.4.1',
     _DESCRIPTION = 'Screen/State Management for the LÖVE framework',
     _URL         = 'https://github.com/rm-code/screenmanager/',
 };
@@ -69,9 +69,9 @@ end
 --
 -- @param nscreen
 --
-function ScreenManager.switch(screen)
+function ScreenManager.switch(screen, ...)
     clear();
-    ScreenManager.push(screen);
+    ScreenManager.push(screen, ...);
 end
 
 ---
@@ -81,7 +81,7 @@ end
 --
 -- @param screen - The name of the screen to push on the stack.
 --
-function ScreenManager.push(screen)
+function ScreenManager.push(screen, ...)
     -- Deactivate the previous screen if there is one.
     if ScreenManager.peek() then
         ScreenManager.peek():setActive(false);
@@ -100,7 +100,7 @@ function ScreenManager.push(screen)
     end
 
     -- Create the new screen and initialise it.
-    stack[#stack]:init();
+    stack[#stack]:init(...);
 end
 
 ---
