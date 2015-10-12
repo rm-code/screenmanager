@@ -67,6 +67,12 @@ function Screen.new()
 
     function self:quit(dquit) end
 
+    function self:touchmoved(id, x, y, pressure) end
+
+    function self:touchpressed(id, x, y, pressure) end
+
+    function self:touchreleased(id, x, y, pressure) end
+
     function self:wheelmoved(x, y) end
 
     function self:isActive()
