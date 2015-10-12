@@ -253,6 +253,14 @@ function ScreenManager.quit(dquit)
     ScreenManager.peek():quit(dquit);
 end
 
+---
+-- Callback function triggered when the mouse wheel is moved.
+-- @param x - Amount of horizontal mouse wheel movement. Positive values indicate movement to the right.
+-- @param y - Amount of vertical mouse wheel movement. Positive values indicate upward movement.
+function ScreenManager.wheelmoved(x, y)
+    ScreenManager.peek():wheelmoved(x, y);
+end
+
 -- ------------------------------------------------
 -- Return Module
 -- ------------------------------------------------
