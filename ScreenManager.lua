@@ -199,6 +199,13 @@ function ScreenManager.keyreleased(key)
 end
 
 ---
+-- Callback function triggered when the system is running out of memory on mobile devices.
+--
+function ScreenManager.lowmemory()
+    ScreenManager.peek():lowmemory();
+end
+
+---
 -- Reroute the textinput callback to the currently active screen.
 -- @param input
 --

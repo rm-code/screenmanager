@@ -53,6 +53,8 @@ function Screen.new()
 
     function self:keyreleased(key) end
 
+    function self:lowmemory() end
+
     function self:textinput(input) end
 
     function self:mousereleased(x, y, button) end
