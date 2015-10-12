@@ -65,6 +65,8 @@ function Screen.new()
 
     function self:quit(dquit) end
 
+    function self:wheelmoved(x, y) end
+
     function self:isActive()
         return active;
     end
