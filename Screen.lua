@@ -53,6 +53,8 @@ function Screen.new()
 
     function self:keyreleased(key) end
 
+    function self:lowmemory() end
+
     function self:textinput(input) end
 
     function self:mousereleased(x, y, button) end
@@ -64,6 +66,14 @@ function Screen.new()
     function self:mousemoved(x, y, dx, dy) end
 
     function self:quit(dquit) end
+
+    function self:touchmoved(id, x, y, pressure) end
+
+    function self:touchpressed(id, x, y, pressure) end
+
+    function self:touchreleased(id, x, y, pressure) end
+
+    function self:wheelmoved(x, y) end
 
     function self:isActive()
         return active;

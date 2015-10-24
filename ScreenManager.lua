@@ -21,7 +21,7 @@
 --===============================================================================--
 
 local ScreenManager = {
-    _VERSION     = '1.4.1',
+    _VERSION     = '1.5.0',
     _DESCRIPTION = 'Screen/State Management for the LÖVE framework',
     _URL         = 'https://github.com/rm-code/screenmanager/',
 };
@@ -199,6 +199,13 @@ function ScreenManager.keyreleased(key)
 end
 
 ---
+-- Callback function triggered when the system is running out of memory on mobile devices.
+--
+function ScreenManager.lowmemory()
+    ScreenManager.peek():lowmemory();
+end
+
+---
 -- Reroute the textinput callback to the currently active screen.
 -- @param input
 --
@@ -251,6 +258,47 @@ end
 --
 function ScreenManager.quit(dquit)
     ScreenManager.peek():quit(dquit);
+end
+
+---
+-- Callback function triggered when a touch press moves inside the touch screen.
+-- @param id - The identifier for the touch press.
+-- @param x - The x-axis position of the touch press inside the window, in pixels.
+-- @param y - The y-axis position of the touch press inside the window, in pixels.
+-- @param pressure - The amount of pressure being applied. Most touch screens aren't pressure sensitive, in which case the pressure will be 1.
+--
+function ScreenManager.touchmoved(id, x, y, pressure)
+    ScreenManager.peek():touchmoved(id, x, y, pressure);
+end
+
+---
+-- Callback function triggered when the touch screen is touched.
+-- @param id - The identifier for the touch press.
+-- @param x - The x-axis position of the touch press inside the window, in pixels.
+-- @param y - The y-axis position of the touch press inside the window, in pixels.
+-- @param pressure - The amount of pressure being applied. Most touch screens aren't pressure sensitive, in which case the pressure will be 1.
+--
+function ScreenManager.touchpressed(id, x, y, pressure)
+    ScreenManager.peek():touchpressed(id, x, y, pressure);
+end
+
+---
+-- Callback function triggered when the touch screen stops being touched.
+-- @param id - The identifier for the touch press.
+-- @param x - The x-axis position of the touch press inside the window, in pixels.
+-- @param y - The y-axis position of the touch press inside the window, in pixels.
+-- @param pressure - The amount of pressure being applied. Most touch screens aren't pressure sensitive, in which case the pressure will be 1.
+--
+function ScreenManager.touchreleased(id, x, y, pressure)
+    ScreenManager.peek():touchreleased(id, x, y, pressure);
+end
+
+---
+-- Callback function triggered when the mouse wheel is moved.
+-- @param x - Amount of horizontal mouse wheel movement. Positive values indicate movement to the right.
+-- @param y - Amount of vertical mouse wheel movement. Positive values indicate upward movement.
+function ScreenManager.wheelmoved(x, y)
+    ScreenManager.peek():wheelmoved(x, y);
 end
 
 -- ------------------------------------------------
