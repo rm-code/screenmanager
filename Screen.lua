@@ -45,6 +45,10 @@ function Screen.new()
 
     function self:focus(dfocus) end
 
+    function self:directorydropped(path) end
+
+    function self:filedropped(file) end
+
     function self:resize(w, h) end
 
     function self:visible(dvisible) end

@@ -162,6 +162,22 @@ function ScreenManager.resize(w, h)
 end
 
 ---
+-- Callback function triggered when a directory is dragged and dropped onto the window.
+-- @param file - The full platform-dependent path to the directory.
+--
+function ScreenManager.directorydropped(path)
+    ScreenManager.peek():directorydropped(path);
+end
+
+---
+-- Callback function triggered when a file is dragged and dropped onto the window.
+-- @param file - The unopened File object representing the file that was dropped.
+--
+function ScreenManager.filedropped(file)
+    ScreenManager.peek():filedropped(file);
+end
+
+---
 -- Update all screens on the stack whenever the game window gains or
 -- loses focus.
 -- @param nfocus
