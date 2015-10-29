@@ -21,7 +21,7 @@
 --===============================================================================--
 
 local ScreenManager = {
-    _VERSION     = '1.5.0',
+    _VERSION     = '1.6.0',
     _DESCRIPTION = 'Screen/State Management for the LÖVE framework',
     _URL         = 'https://github.com/rm-code/screenmanager/',
 };
@@ -159,6 +159,22 @@ function ScreenManager.resize(w, h)
     for i = 1, #stack do
         stack[i]:resize(w, h);
     end
+end
+
+---
+-- Callback function triggered when a directory is dragged and dropped onto the window.
+-- @param file - The full platform-dependent path to the directory.
+--
+function ScreenManager.directorydropped(path)
+    ScreenManager.peek():directorydropped(path);
+end
+
+---
+-- Callback function triggered when a file is dragged and dropped onto the window.
+-- @param file - The unopened File object representing the file that was dropped.
+--
+function ScreenManager.filedropped(file)
+    ScreenManager.peek():filedropped(file);
 end
 
 ---
