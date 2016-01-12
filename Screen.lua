@@ -1,6 +1,6 @@
 --===============================================================================--
 --                                                                               --
--- Copyright (c) 2014 - 2015 Robert Machmer                                      --
+-- Copyright (c) 2014 - 2016 Robert Machmer                                      --
 --                                                                               --
 -- This software is provided 'as-is', without any express or implied             --
 -- warranty. In no event will the authors be held liable for any damages         --
@@ -39,53 +39,59 @@ function Screen.new()
 
     function self:close() end
 
-    function self:update(dt) end
-
-    function self:draw() end
-
-    function self:focus(dfocus) end
-
-    function self:directorydropped(path) end
-
-    function self:filedropped(file) end
-
-    function self:resize(w, h) end
-
-    function self:visible(dvisible) end
-
-    function self:keypressed(key) end
-
-    function self:keyreleased(key) end
-
-    function self:lowmemory() end
-
-    function self:textinput(input) end
-
-    function self:mousereleased(x, y, button) end
-
-    function self:mousepressed(x, y, button) end
-
-    function self:mousefocus(focus) end
-
-    function self:mousemoved(x, y, dx, dy) end
-
-    function self:quit(dquit) end
-
-    function self:touchmoved(id, x, y, pressure) end
-
-    function self:touchpressed(id, x, y, pressure) end
-
-    function self:touchreleased(id, x, y, pressure) end
-
-    function self:wheelmoved(x, y) end
-
     function self:isActive()
         return active;
     end
 
-    function self:setActive(dactiv)
+    function self:setActive( dactiv )
         active = dactiv;
     end
+
+    -- ------------------------------------------------
+    -- Callback-stubs
+    -- ------------------------------------------------
+
+    function self:directorydropped() end
+
+    function self:draw() end
+
+    function self:filedropped() end
+
+    function self:focus() end
+
+    function self:keypressed() end
+
+    function self:keyreleased() end
+
+    function self:lowmemory() end
+
+    function self:mousefocus() end
+
+    function self:mousemoved() end
+
+    function self:mousepressed() end
+
+    function self:mousereleased() end
+
+    function self:quit() end
+
+    function self:resize() end
+
+    function self:textedited() end
+    
+    function self:textinput() end
+
+    function self:touchmoved() end
+
+    function self:touchpressed() end
+
+    function self:touchreleased() end
+
+    function self:update() end
+
+    function self:visible() end
+
+    function self:wheelmoved() end
 
     return self;
 end
