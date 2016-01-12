@@ -92,7 +92,7 @@ function ScreenManager.push(screen, ...)
         stack[#stack + 1] = screens[screen].new();
     else
         local str = "{";
-        for i, v in pairs(screens) do
+        for i, _ in pairs(screens) do
             str = str .. i .. ', ';
         end
         str = str .. "}";
