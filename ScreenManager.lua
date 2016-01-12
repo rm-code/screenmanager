@@ -131,6 +131,18 @@ function ScreenManager.pop()
     end
 end
 
+-- ------------------------------------------------
+-- LOVE Callbacks
+-- ------------------------------------------------
+
+---
+-- Callback function triggered when a directory is dragged and dropped onto the window.
+-- @param file - The full platform-dependent path to the directory.
+--
+function ScreenManager.directorydropped(path)
+    ScreenManager.peek():directorydropped(path);
+end
+
 ---
 -- Draw all screens on the stack. Screens that are higher on the stack
 -- will overlay screens that are on the bottom.
@@ -139,34 +151,6 @@ function ScreenManager.draw()
     for i = 1, #stack do
         stack[i]:draw();
     end
-end
-
----
--- Update all screens on the stack.
---
-function ScreenManager.update(dt)
-    for i = 1, #stack do
-        stack[i]:update(dt);
-    end
-end
-
----
--- Resize all screens on the stack.
--- @param w
--- @param h
---
-function ScreenManager.resize(w, h)
-    for i = 1, #stack do
-        stack[i]:resize(w, h);
-    end
-end
-
----
--- Callback function triggered when a directory is dragged and dropped onto the window.
--- @param file - The full platform-dependent path to the directory.
---
-function ScreenManager.directorydropped(path)
-    ScreenManager.peek():directorydropped(path);
 end
 
 ---
@@ -185,16 +169,6 @@ end
 function ScreenManager.focus(nfocus)
     for i = 1, #stack do
         stack[i]:focus(nfocus);
-    end
-end
-
----
--- Update all screens on the stack whenever the game window is minimized.
--- @param nvisible
---
-function ScreenManager.visible(nvisible)
-    for i = 1, #stack do
-        stack[i]:visible(nvisible);
     end
 end
 
@@ -222,11 +196,22 @@ function ScreenManager.lowmemory()
 end
 
 ---
--- Reroute the textinput callback to the currently active screen.
--- @param input
+-- Reroute the mousefocus callback to the currently active screen.
+-- @param button
 --
-function ScreenManager.textinput(input)
-    ScreenManager.peek():textinput(input);
+function ScreenManager.mousefocus(focus)
+    ScreenManager.peek():mousefocus(focus);
+end
+
+---
+-- Callback function triggered when the mouse is moved.
+-- @param x - Mouse x position.
+-- @param y - Mouse y position.
+-- @param dx - The amount moved along the x-axis since the last time love.mousemoved was called.
+-- @param dy - The amount moved along the y-axis since the last time love.mousemoved was called.
+--
+function ScreenManager.mousemoved(x, y, dx, dy)
+    ScreenManager.peek():mousemoved(x, y, dx, dy);
 end
 
 ---
@@ -250,30 +235,30 @@ function ScreenManager.mousereleased(x, y, button)
 end
 
 ---
--- Reroute the mousefocus callback to the currently active screen.
--- @param button
---
-function ScreenManager.mousefocus(focus)
-    ScreenManager.peek():mousefocus(focus);
-end
-
----
--- Callback function triggered when the mouse is moved.
--- @param x - Mouse x position.
--- @param y - Mouse y position.
--- @param dx - The amount moved along the x-axis since the last time love.mousemoved was called.
--- @param dy - The amount moved along the y-axis since the last time love.mousemoved was called.
---
-function ScreenManager.mousemoved(x, y, dx, dy)
-    ScreenManager.peek():mousemoved(x, y, dx, dy);
-end
-
----
 -- Reroute the quit callback to the currently active screen.
 -- @param dquit
 --
 function ScreenManager.quit(dquit)
     ScreenManager.peek():quit(dquit);
+end
+
+---
+-- Resize all screens on the stack.
+-- @param w
+-- @param h
+--
+function ScreenManager.resize(w, h)
+    for i = 1, #stack do
+        stack[i]:resize(w, h);
+    end
+end
+
+---
+-- Reroute the textinput callback to the currently active screen.
+-- @param input
+--
+function ScreenManager.textinput(input)
+    ScreenManager.peek():textinput(input);
 end
 
 ---
@@ -307,6 +292,25 @@ end
 --
 function ScreenManager.touchreleased(id, x, y, pressure)
     ScreenManager.peek():touchreleased(id, x, y, pressure);
+end
+
+---
+-- Update all screens on the stack.
+--
+function ScreenManager.update(dt)
+    for i = 1, #stack do
+        stack[i]:update(dt);
+    end
+end
+
+---
+-- Update all screens on the stack whenever the game window is minimized.
+-- @param nvisible
+--
+function ScreenManager.visible(nvisible)
+    for i = 1, #stack do
+        stack[i]:visible(nvisible);
+    end
 end
 
 ---
