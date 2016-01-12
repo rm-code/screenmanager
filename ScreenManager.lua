@@ -218,23 +218,25 @@ function ScreenManager.mousemoved( x, y, dx, dy )
 end
 
 ---
--- Reroute the mousepressed callback to the currently active screen.
--- @param x
--- @param y
--- @param button
+-- Callback function triggered when a mouse button is pressed.
+-- @param x - Mouse x position, in pixels.
+-- @param y - Mouse y position, in pixels.
+-- @param button - The button index that was pressed. 1 is the primary mouse button, 2 is the secondary mouse button and 3 is the middle button. Further buttons are mouse dependant.
+-- @param istouch - True if the mouse button press originated from a touchscreen touch-press.
 --
-function ScreenManager.mousepressed( x, y, button )
-    ScreenManager.peek():mousepressed( x, y, button );
+function ScreenManager.mousepressed( x, y, button, istouch )
+    ScreenManager.peek():mousepressed( x, y, button, istouch );
 end
 
 ---
--- Reroute the mousereleased callback to the currently active screen.
--- @param x
--- @param y
--- @param button
+-- Callback function triggered when a mouse button is released.
+-- @param x - Mouse x position, in pixels.
+-- @param y - Mouse y position, in pixels.
+-- @param button - The button index that was released. 1 is the primary mouse button, 2 is the secondary mouse button and 3 is the middle button. Further buttons are mouse dependant.
+-- @param istouch - True if the mouse button release originated from a touchscreen touch-release.
 --
-function ScreenManager.mousereleased( x, y, button )
-    ScreenManager.peek():mousereleased( x, y, button );
+function ScreenManager.mousereleased( x, y, button, istouch )
+    ScreenManager.peek():mousereleased( x, y, button, istouch );
 end
 
 ---
