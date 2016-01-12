@@ -6,10 +6,9 @@ It also offers hooks for most of LÖVE's callback functions. Based on the type o
 
 ## Example
 
-This is a simple example of how the ScreenManager should be used (note: You will have to change the paths in the example to fit your setup). 
+This is a simple example of how the ScreenManager should be used (note: You will have to change the paths in the example to fit your setup).
 
-```
-#!lua
+```lua
 -- main.lua
 
 local ScreenManager = require('lib/ScreenManager');
@@ -32,8 +31,7 @@ end
 ```
 Note how MainScreen inherits from Screen.lua. This isn't mandatory, but recommended since Screen.lua already has templates for most of the callback functions.
 
-```
-#!lua
+```lua
 -- MainScreen.lua
 
 local Screen = require('lib/Screen');
