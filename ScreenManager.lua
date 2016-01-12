@@ -200,7 +200,7 @@ end
 
 ---
 -- Reroute the mousefocus callback to the currently active screen.
--- @param button
+-- @param focus - Wether the window has mouse focus or not.
 --
 function ScreenManager.mousefocus( focus )
     ScreenManager.peek():mousefocus( focus );
@@ -241,16 +241,17 @@ end
 
 ---
 -- Reroute the quit callback to the currently active screen.
--- @param dquit
+-- @param dquit - Abort quitting. If true, do not close the game.
 --
 function ScreenManager.quit( dquit )
     ScreenManager.peek():quit( dquit );
 end
 
 ---
--- Resize all screens on the stack.
--- @param w
--- @param h
+-- Called when the window is resized, for example if the user resizes the window, or if love.window.setMode is called with an unsupported width or height in fullscreen and the window chooses the closest appropriate size.
+--
+-- @param w - The new width, in pixels.
+-- @param h - The new height, in pixels.
 --
 function ScreenManager.resize( w, h )
     for i = 1, #stack do
