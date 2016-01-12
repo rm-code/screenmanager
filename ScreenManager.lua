@@ -1,6 +1,6 @@
 --===============================================================================--
 --                                                                               --
--- Copyright (c) 2014 - 2015 Robert Machmer                                      --
+-- Copyright (c) 2014 - 2016 Robert Machmer                                      --
 --                                                                               --
 -- This software is provided 'as-is', without any express or implied             --
 -- warranty. In no event will the authors be held liable for any damages         --
