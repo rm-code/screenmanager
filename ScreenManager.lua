@@ -173,19 +173,22 @@ function ScreenManager.focus( nfocus )
 end
 
 ---
--- Reroutes the keypressed callback to the currently active screen.
--- @param key
+-- Callback function triggered when a key is pressed.
+-- @param key - Character of the pressed key.
+-- @param scancode - The scancode representing the pressed key.
+-- @param isrepeat - Whether this keypress event is a repeat. The delay between key repeats depends on the user's system settings.
 --
-function ScreenManager.keypressed( key )
-    ScreenManager.peek():keypressed( key );
+function ScreenManager.keypressed(  key, scancode, isrepeat )
+    ScreenManager.peek():keypressed( key, scancode, isrepeat);
 end
 
 ---
--- Reroutes the keyreleased callback to the currently active screen.
--- @param key
+-- Callback function triggered when a keyboard key is released.
+-- @param key - Character of the released key.
+-- @param scancode - The scancode representing the released key.
 --
-function ScreenManager.keyreleased( key )
-    ScreenManager.peek():keyreleased( key );
+function ScreenManager.keyreleased( key, scancode )
+    ScreenManager.peek():keyreleased( key, scancode );
 end
 
 ---
