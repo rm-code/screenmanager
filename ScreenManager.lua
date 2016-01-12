@@ -259,6 +259,17 @@ function ScreenManager.resize( w, h )
 end
 
 ---
+-- Called when the candidate text for an IME (Input Method Editor) has changed.
+-- The candidate text is not the final text that the user will eventually choose. Use love.textinput for that.
+-- @param text - The UTF-8 encoded unicode candidate text.
+-- @param start - The start cursor of the selected candidate text.
+-- @param length - The length of the selected candidate text. May be 0.
+--
+function ScreenManager.textedited( text, start, length )
+    ScreenManager.peek():textedited( text, start, length );
+end
+
+---
 -- Reroute the textinput callback to the currently active screen.
 -- @param input
 --

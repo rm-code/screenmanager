@@ -77,6 +77,8 @@ function Screen.new()
 
     function self:resize() end
 
+    function self:textedited() end
+    
     function self:textinput() end
 
     function self:touchmoved() end
