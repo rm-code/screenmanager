@@ -39,51 +39,51 @@ function Screen.new()
 
     function self:close() end
 
-    function self:update(dt) end
+    function self:update( dt ) end
 
     function self:draw() end
 
-    function self:focus(dfocus) end
+    function self:focus( dfocus ) end
 
-    function self:directorydropped(path) end
+    function self:directorydropped( path ) end
 
-    function self:filedropped(file) end
+    function self:filedropped( file ) end
 
-    function self:resize(w, h) end
+    function self:resize( w, h ) end
 
-    function self:visible(dvisible) end
+    function self:visible( dvisible ) end
 
-    function self:keypressed(key) end
+    function self:keypressed( key ) end
 
-    function self:keyreleased(key) end
+    function self:keyreleased( key ) end
 
     function self:lowmemory() end
 
-    function self:textinput(input) end
+    function self:textinput( input ) end
 
-    function self:mousereleased(x, y, button) end
+    function self:mousereleased( x, y, button ) end
 
-    function self:mousepressed(x, y, button) end
+    function self:mousepressed( x, y, button ) end
 
-    function self:mousefocus(focus) end
+    function self:mousefocus( focus ) end
 
-    function self:mousemoved(x, y, dx, dy) end
+    function self:mousemoved( x, y, dx, dy ) end
 
-    function self:quit(dquit) end
+    function self:quit( dquit ) end
 
-    function self:touchmoved(id, x, y, pressure) end
+    function self:touchmoved( id, x, y, pressure ) end
 
-    function self:touchpressed(id, x, y, pressure) end
+    function self:touchpressed( id, x, y, pressure ) end
 
-    function self:touchreleased(id, x, y, pressure) end
+    function self:touchreleased( id, x, y, pressure ) end
 
-    function self:wheelmoved(x, y) end
+    function self:wheelmoved( x, y ) end
 
     function self:isActive()
         return active;
     end
 
-    function self:setActive(dactiv)
+    function self:setActive( dactiv )
         active = dactiv;
     end
 

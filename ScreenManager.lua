@@ -57,10 +57,10 @@ end
 -- @param nscreens - The list of possible screens.
 -- @param screen - The first screen to push to the stack.
 --
-function ScreenManager.init(nscreens, screen)
+function ScreenManager.init( nscreens, screen )
     stack = {};
     screens = nscreens;
-    ScreenManager.push(screen);
+    ScreenManager.push( screen );
 end
 
 ---
@@ -69,9 +69,9 @@ end
 --
 -- @param nscreen
 --
-function ScreenManager.switch(screen, ...)
+function ScreenManager.switch( screen, ... )
     clear();
-    ScreenManager.push(screen, ...);
+    ScreenManager.push( screen, ... );
 end
 
 ---
@@ -81,10 +81,10 @@ end
 --
 -- @param screen - The name of the screen to push on the stack.
 --
-function ScreenManager.push(screen, ...)
+function ScreenManager.push( screen, ... )
     -- Deactivate the previous screen if there is one.
     if ScreenManager.peek() then
-        ScreenManager.peek():setActive(false);
+        ScreenManager.peek():setActive( false );
     end
 
     -- Push the new screen onto the stack.
@@ -92,7 +92,7 @@ function ScreenManager.push(screen, ...)
         stack[#stack + 1] = screens[screen].new();
     else
         local str = "{";
-        for i, _ in pairs(screens) do
+        for i, _ in pairs( screens ) do
             str = str .. i .. ', ';
         end
         str = str .. "}";
@@ -100,7 +100,7 @@ function ScreenManager.push(screen, ...)
     end
 
     -- Create the new screen and initialise it.
-    stack[#stack]:init(...);
+    stack[#stack]:init( ... );
 end
 
 ---
@@ -125,7 +125,7 @@ function ScreenManager.pop()
         tmp:close();
 
         -- Activate next screen on the stack.
-        ScreenManager.peek():setActive(true);
+        ScreenManager.peek():setActive( true );
     else
         error("Can't close the last screen. Use switch() to clear the screen manager and add a new screen.");
     end
@@ -139,8 +139,8 @@ end
 -- Callback function triggered when a directory is dragged and dropped onto the window.
 -- @param file - The full platform-dependent path to the directory.
 --
-function ScreenManager.directorydropped(path)
-    ScreenManager.peek():directorydropped(path);
+function ScreenManager.directorydropped( path )
+    ScreenManager.peek():directorydropped( path );
 end
 
 ---
@@ -157,8 +157,8 @@ end
 -- Callback function triggered when a file is dragged and dropped onto the window.
 -- @param file - The unopened File object representing the file that was dropped.
 --
-function ScreenManager.filedropped(file)
-    ScreenManager.peek():filedropped(file);
+function ScreenManager.filedropped( file )
+    ScreenManager.peek():filedropped( file );
 end
 
 ---
@@ -166,9 +166,9 @@ end
 -- loses focus.
 -- @param nfocus
 --
-function ScreenManager.focus(nfocus)
+function ScreenManager.focus( nfocus )
     for i = 1, #stack do
-        stack[i]:focus(nfocus);
+        stack[i]:focus( nfocus );
     end
 end
 
@@ -176,16 +176,16 @@ end
 -- Reroutes the keypressed callback to the currently active screen.
 -- @param key
 --
-function ScreenManager.keypressed(key)
-    ScreenManager.peek():keypressed(key);
+function ScreenManager.keypressed( key )
+    ScreenManager.peek():keypressed( key );
 end
 
 ---
 -- Reroutes the keyreleased callback to the currently active screen.
 -- @param key
 --
-function ScreenManager.keyreleased(key)
-    ScreenManager.peek():keyreleased(key);
+function ScreenManager.keyreleased( key )
+    ScreenManager.peek():keyreleased( key );
 end
 
 ---
@@ -199,8 +199,8 @@ end
 -- Reroute the mousefocus callback to the currently active screen.
 -- @param button
 --
-function ScreenManager.mousefocus(focus)
-    ScreenManager.peek():mousefocus(focus);
+function ScreenManager.mousefocus( focus )
+    ScreenManager.peek():mousefocus( focus );
 end
 
 ---
@@ -210,8 +210,8 @@ end
 -- @param dx - The amount moved along the x-axis since the last time love.mousemoved was called.
 -- @param dy - The amount moved along the y-axis since the last time love.mousemoved was called.
 --
-function ScreenManager.mousemoved(x, y, dx, dy)
-    ScreenManager.peek():mousemoved(x, y, dx, dy);
+function ScreenManager.mousemoved( x, y, dx, dy )
+    ScreenManager.peek():mousemoved( x, y, dx, dy );
 end
 
 ---
@@ -220,8 +220,8 @@ end
 -- @param y
 -- @param button
 --
-function ScreenManager.mousepressed(x, y, button)
-    ScreenManager.peek():mousepressed(x, y, button);
+function ScreenManager.mousepressed( x, y, button )
+    ScreenManager.peek():mousepressed( x, y, button );
 end
 
 ---
@@ -230,16 +230,16 @@ end
 -- @param y
 -- @param button
 --
-function ScreenManager.mousereleased(x, y, button)
-    ScreenManager.peek():mousereleased(x, y, button);
+function ScreenManager.mousereleased( x, y, button )
+    ScreenManager.peek():mousereleased( x, y, button );
 end
 
 ---
 -- Reroute the quit callback to the currently active screen.
 -- @param dquit
 --
-function ScreenManager.quit(dquit)
-    ScreenManager.peek():quit(dquit);
+function ScreenManager.quit( dquit )
+    ScreenManager.peek():quit( dquit );
 end
 
 ---
@@ -247,9 +247,9 @@ end
 -- @param w
 -- @param h
 --
-function ScreenManager.resize(w, h)
+function ScreenManager.resize( w, h )
     for i = 1, #stack do
-        stack[i]:resize(w, h);
+        stack[i]:resize( w, h );
     end
 end
 
@@ -257,8 +257,8 @@ end
 -- Reroute the textinput callback to the currently active screen.
 -- @param input
 --
-function ScreenManager.textinput(input)
-    ScreenManager.peek():textinput(input);
+function ScreenManager.textinput( input )
+    ScreenManager.peek():textinput( input );
 end
 
 ---
@@ -268,8 +268,8 @@ end
 -- @param y - The y-axis position of the touch press inside the window, in pixels.
 -- @param pressure - The amount of pressure being applied. Most touch screens aren't pressure sensitive, in which case the pressure will be 1.
 --
-function ScreenManager.touchmoved(id, x, y, pressure)
-    ScreenManager.peek():touchmoved(id, x, y, pressure);
+function ScreenManager.touchmoved( id, x, y, pressure )
+    ScreenManager.peek():touchmoved( id, x, y, pressure );
 end
 
 ---
@@ -279,8 +279,8 @@ end
 -- @param y - The y-axis position of the touch press inside the window, in pixels.
 -- @param pressure - The amount of pressure being applied. Most touch screens aren't pressure sensitive, in which case the pressure will be 1.
 --
-function ScreenManager.touchpressed(id, x, y, pressure)
-    ScreenManager.peek():touchpressed(id, x, y, pressure);
+function ScreenManager.touchpressed( id, x, y, pressure )
+    ScreenManager.peek():touchpressed( id, x, y, pressure );
 end
 
 ---
@@ -290,16 +290,16 @@ end
 -- @param y - The y-axis position of the touch press inside the window, in pixels.
 -- @param pressure - The amount of pressure being applied. Most touch screens aren't pressure sensitive, in which case the pressure will be 1.
 --
-function ScreenManager.touchreleased(id, x, y, pressure)
-    ScreenManager.peek():touchreleased(id, x, y, pressure);
+function ScreenManager.touchreleased( id, x, y, pressure )
+    ScreenManager.peek():touchreleased( id, x, y, pressure );
 end
 
 ---
 -- Update all screens on the stack.
 --
-function ScreenManager.update(dt)
+function ScreenManager.update( dt )
     for i = 1, #stack do
-        stack[i]:update(dt);
+        stack[i]:update( dt );
     end
 end
 
@@ -307,9 +307,9 @@ end
 -- Update all screens on the stack whenever the game window is minimized.
 -- @param nvisible
 --
-function ScreenManager.visible(nvisible)
+function ScreenManager.visible( nvisible )
     for i = 1, #stack do
-        stack[i]:visible(nvisible);
+        stack[i]:visible( nvisible );
     end
 end
 
@@ -317,8 +317,8 @@ end
 -- Callback function triggered when the mouse wheel is moved.
 -- @param x - Amount of horizontal mouse wheel movement. Positive values indicate movement to the right.
 -- @param y - Amount of vertical mouse wheel movement. Positive values indicate upward movement.
-function ScreenManager.wheelmoved(x, y)
-    ScreenManager.peek():wheelmoved(x, y);
+function ScreenManager.wheelmoved( x, y )
+    ScreenManager.peek():wheelmoved( x, y );
 end
 
 -- ------------------------------------------------
