@@ -60,11 +60,12 @@ end
 -- @param screen   (string) The key of the first screen to push to the stack.
 --                           Use the key under which the screen in question is
 --                           stored in the nscreens table.
+-- @param ...      (vararg) One or multiple arguments passed to the new screen.
 --
-function ScreenManager.init( nscreens, screen )
+function ScreenManager.init( nscreens, screen, ... )
     stack = {};
     screens = nscreens;
-    ScreenManager.push( screen );
+    ScreenManager.push( screen, ... );
 end
 
 ---
