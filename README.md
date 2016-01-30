@@ -1,5 +1,9 @@
 #ScreenManager
 
+[![Version](https://img.shields.io/badge/Version-1.8.0-blue.svg)](https://github.com/rm-code/screenmanager/releases/latest)
+[![LOVE](https://img.shields.io/badge/L%C3%96VE-0.10.0-EA316E.svg)](http://love2d.org/)
+[![License](http://img.shields.io/badge/Licence-zlib-brightgreen.svg)](LICENSE.md)
+
 The ScreenManager library is a state manager at heart which allows some nifty things, like stacking multiple screens on top of each other.
 
 It also offers hooks for most of LÖVE's callback functions. Based on the type of callback the calls are rerouted to either only the active screen (love.keypressed, love.quit, ...) or to all screens (love.resize, love.visible, ...).
@@ -11,11 +15,11 @@ This is a simple example of how the ScreenManager should be used (note: You will
 ```lua
 -- main.lua
 
-local ScreenManager = require('lib/ScreenManager');
+local ScreenManager = require('lib.ScreenManager');
 
 function love.load()
     local screens = {
-        main = require('src/screens/MainScreen');
+        main = require('src.screens.MainScreen');
     };
 
     ScreenManager.init(screens, 'main');
@@ -34,7 +38,7 @@ Note how MainScreen inherits from Screen.lua. This isn't mandatory, but recommen
 ```lua
 -- MainScreen.lua
 
-local Screen = require('lib/Screen');
+local Screen = require('lib.Screen');
 
 local MainScreen = {};
 
