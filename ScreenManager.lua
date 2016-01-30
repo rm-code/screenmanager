@@ -144,7 +144,7 @@ end
 -- ------------------------------------------------
 
 ---
--- Reroute the directorydropped callback to the currently active screen.
+-- Reroutes the directorydropped callback to the currently active screen.
 -- @param path (string) The full platform-dependent path to the directory.
 --                       It can be used as an argument to love.filesystem.mount,
 --                       in order to gain read access to the directory with
@@ -155,7 +155,7 @@ function ScreenManager.directorydropped( path )
 end
 
 ---
--- Reroute the draw callback to all screens on the stack.
+-- Reroutes the draw callback to all screens on the stack.
 -- Screens that are higher on the stack will overlay screens that are below
 -- them.
 --
@@ -166,7 +166,7 @@ function ScreenManager.draw()
 end
 
 ---
--- Reroute the filedropped callback to the currently active screen.
+-- Reroutes the filedropped callback to the currently active screen.
 -- @param file (File) The unopened File object representing the file that was
 --                     dropped.
 --
@@ -175,7 +175,7 @@ function ScreenManager.filedropped( file )
 end
 
 ---
--- Reroute the focus callback to all screens on the stack.
+-- Reroutes the focus callback to all screens on the stack.
 -- @param focus (boolean) True if the window gains focus, false if it loses focus.
 --
 function ScreenManager.focus( focus )
@@ -185,7 +185,7 @@ function ScreenManager.focus( focus )
 end
 
 ---
--- Reroute the keypressed callback to the currently active screen.
+-- Reroutes the keypressed callback to the currently active screen.
 -- @param key      (KeyConstant) Character of the pressed key.
 -- @param scancode (Scancode)    The scancode representing the pressed key.
 -- @param isrepeat (boolean)     Whether this keypress event is a repeat. The
@@ -197,7 +197,7 @@ function ScreenManager.keypressed(  key, scancode, isrepeat )
 end
 
 ---
--- Reroute the keyreleased callback to the currently active screen.
+-- Reroutes the keyreleased callback to the currently active screen.
 -- @param key      (KeyConstant) Character of the released key.
 -- @param scancode (Scancode)    The scancode representing the released key.
 --
@@ -206,7 +206,7 @@ function ScreenManager.keyreleased( key, scancode )
 end
 
 ---
--- Reroute the lowmemory callback to the currently active screen.
+-- Reroutes the lowmemory callback to the currently active screen.
 -- mobile devices.
 --
 function ScreenManager.lowmemory()
@@ -214,7 +214,7 @@ function ScreenManager.lowmemory()
 end
 
 ---
--- Reroute the mousefocus callback to the currently active screen.
+-- Reroutes the mousefocus callback to the currently active screen.
 -- @param focus (boolean) Wether the window has mouse focus or not.
 --
 function ScreenManager.mousefocus( focus )
@@ -222,7 +222,7 @@ function ScreenManager.mousefocus( focus )
 end
 
 ---
--- Reroute the mousemoved callback to the currently active screen.
+-- Reroutes the mousemoved callback to the currently active screen.
 -- @param x  (number) Mouse x position.
 -- @param y  (number) Mouse y position.
 -- @param dx (number) The amount moved along the x-axis since the last time
@@ -235,7 +235,7 @@ function ScreenManager.mousemoved( x, y, dx, dy )
 end
 
 ---
--- Reroute the mousepressed callback to the currently active screen.
+-- Reroutes the mousepressed callback to the currently active screen.
 -- @param x       (number)  Mouse x position, in pixels.
 -- @param y       (number)  Mouse y position, in pixels.
 -- @param button  (number)  The button index that was pressed. 1 is the primary
@@ -250,7 +250,7 @@ function ScreenManager.mousepressed( x, y, button, istouch )
 end
 
 ---
--- Reroute the mousereleased callback to the currently active screen.
+-- Reroutes the mousereleased callback to the currently active screen.
 -- @param x       (number)  Mouse x position, in pixels.
 -- @param y       (number)  Mouse y position, in pixels.
 -- @param button  (number)  The button index that was released. 1 is the primary
@@ -265,7 +265,7 @@ function ScreenManager.mousereleased( x, y, button, istouch )
 end
 
 ---
--- Reroute the quit callback to the currently active screen.
+-- Reroutes the quit callback to the currently active screen.
 -- @return quit (boolean) Abort quitting. If true, do not close the game.
 --
 function ScreenManager.quit()
@@ -273,7 +273,7 @@ function ScreenManager.quit()
 end
 
 ---
--- Reroute the resize callback to all screens on the stack.
+-- Reroutes the resize callback to all screens on the stack.
 -- @param w (number) The new width, in pixels.
 -- @param h (number) The new height, in pixels.
 --
@@ -284,7 +284,7 @@ function ScreenManager.resize( w, h )
 end
 
 ---
--- Reroute the textedited callback to the currently active screen.
+-- Reroutes the textedited callback to the currently active screen.
 -- @param text   (string) The UTF-8 encoded unicode candidate text.
 -- @param start  (number) The start cursor of the selected candidate text.
 -- @param length (number) The length of the selected candidate text. May be 0.
@@ -294,7 +294,7 @@ function ScreenManager.textedited( text, start, length )
 end
 
 ---
--- Reroute the textinput callback to the currently active screen.
+-- Reroutes the textinput callback to the currently active screen.
 -- @param input (string) The UTF-8 encoded unicode text.
 --
 function ScreenManager.textinput( input )
@@ -302,7 +302,7 @@ function ScreenManager.textinput( input )
 end
 
 ---
--- Reroute the threaderror callback to all screens.
+-- Reroutes the threaderror callback to all screens.
 -- @param thread   (Thread) The thread which produced the error.
 -- @param errorstr (string) The error message.
 --
@@ -314,7 +314,7 @@ end
 
 
 ---
--- Reroute the touchmoved callback to the currently active screen.
+-- Reroutes the touchmoved callback to the currently active screen.
 -- @param id       (light userdata) The identifier for the touch press.
 -- @param x        (number)         The x-axis position of the touch press inside the
 --                                   window, in pixels.
@@ -333,7 +333,7 @@ function ScreenManager.touchmoved( id, x, y, dx, dy, pressure )
 end
 
 ---
--- Reroute the touchpressed callback to the currently active screen.
+-- Reroutes the touchpressed callback to the currently active screen.
 -- @param id       (light userdata) The identifier for the touch press.
 -- @param x        (number)         The x-axis position of the touch press inside the
 --                                   window, in pixels.
@@ -352,7 +352,7 @@ function ScreenManager.touchpressed( id, x, y, dx, dy, pressure )
 end
 
 ---
--- Reroute the touchreleased callback to the currently active screen.
+-- Reroutes the touchreleased callback to the currently active screen.
 -- @param id       (light userdata) The identifier for the touch press.
 -- @param x        (number)         The x-axis position of the touch press inside the
 --                                   window, in pixels.
@@ -371,7 +371,7 @@ function ScreenManager.touchreleased( id, x, y, dx, dy, pressure )
 end
 
 ---
--- Reroute the update callback to all screens.
+-- Reroutes the update callback to all screens.
 -- @param dt (number) Time since the last update in seconds.
 --
 function ScreenManager.update( dt )
@@ -381,7 +381,7 @@ function ScreenManager.update( dt )
 end
 
 ---
--- Reroute the visible callback to all screens.
+-- Reroutes the visible callback to all screens.
 -- @param visible (boolean) True if the window is visible, false if it isn't.
 --
 function ScreenManager.visible( visible )
@@ -391,7 +391,7 @@ function ScreenManager.visible( visible )
 end
 
 ---
--- Reroute the wheelmoved callback to the currently active screen.
+-- Reroutes the wheelmoved callback to the currently active screen.
 -- @param x (number) Amount of horizontal mouse wheel movement. Positive values
 --                    indicate movement to the right.
 -- @param y (number) Amount of vertical mouse wheel movement. Positive values
