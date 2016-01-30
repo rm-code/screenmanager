@@ -81,6 +81,8 @@ function Screen.new()
     
     function self:textinput() end
 
+    function self:threaderror() end
+
     function self:touchmoved() end
 
     function self:touchpressed() end

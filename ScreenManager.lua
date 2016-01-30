@@ -279,6 +279,18 @@ function ScreenManager.textinput( input )
 end
 
 ---
+-- Reroute the threaderror callback to all screens.
+-- @param thread   (Thread) The thread which produced the error.
+-- @param errorstr (string) The error message.
+--
+function ScreenManager.threaderror( thread, errorstr )
+    for i = 1, #stack do
+        stack[i]:threaderror( thread, errorstr );
+    end
+end
+
+
+---
 -- Callback function triggered when a touch press moves inside the touch screen.
 -- @param id - The identifier for the touch press.
 -- @param x - The x-axis position of the touch press inside the window, in pixels.
