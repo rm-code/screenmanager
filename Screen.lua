@@ -78,8 +78,10 @@ function Screen.new()
     function self:resize() end
 
     function self:textedited() end
-    
+
     function self:textinput() end
+
+    function self:threaderror() end
 
     function self:touchmoved() end
 
@@ -92,6 +94,24 @@ function Screen.new()
     function self:visible() end
 
     function self:wheelmoved() end
+
+    function self:gamepadaxis() end
+
+    function self:gamepadpressed() end
+
+    function self:gamepadreleased() end
+
+    function self:joystickadded() end
+
+    function self:joystickaxis() end
+
+    function self:joystickhat() end
+
+    function self:joystickpressed() end
+
+    function self:joystickreleased() end
+
+    function self:joystickremoved() end
 
     return self;
 end
