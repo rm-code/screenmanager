@@ -95,6 +95,24 @@ function Screen.new()
 
     function self:wheelmoved() end
 
+    function self:gamepadaxis() end
+
+    function self:gamepadpressed() end
+
+    function self:gamepadreleased() end
+
+    function self:joystickadded() end
+
+    function self:joystickaxis() end
+
+    function self:joystickhat() end
+
+    function self:joystickpressed() end
+
+    function self:joystickreleased() end
+
+    function self:joystickremoved() end
+
     return self;
 end
 
