@@ -50,7 +50,7 @@
 <h2><a href="#Functions">Functions</a></h2>
 <table class="function_list">
 	<tr>
-	<td class="name" nowrap><a href="#init">init (nscreens, screen)</a></td>
+	<td class="name" nowrap><a href="#init">init (nscreens, screen, ...)</a></td>
 	<td class="summary">Initialise the ScreenManager.</td>
 	</tr>
 	<tr>
@@ -157,6 +157,38 @@
 	<td class="name" nowrap><a href="#wheelmoved">wheelmoved (x, y)</a></td>
 	<td class="summary">Reroutes the wheelmoved callback to the currently active screen.</td>
 	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#gamepadaxis">gamepadaxis (joystick, axis, value)</a></td>
+	<td class="summary">Reroutes the gamepadaxis callback to the currently active screen.</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#gamepadpressed">gamepadpressed (joystick, button)</a></td>
+	<td class="summary">Reroutes the gamepadpressed callback to the currently active screen.</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#gamepadreleased">gamepadreleased (joystick, button)</a></td>
+	<td class="summary">Reroutes the gamepadreleased callback to the currently active screen.</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#joystickadded">joystickadded (joystick)</a></td>
+	<td class="summary">Reroutes the joystickadded callback to the currently active screen.</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#joystickhat">joystickhat (joystick, hat, direction)</a></td>
+	<td class="summary">Reroutes the joystickhat callback to the currently active screen.</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#joystickpressed">joystickpressed (joystick, button)</a></td>
+	<td class="summary">Reroutes the joystickpressed callback to the currently active screen.</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#joystickreleased">joystickreleased (joystick, button)</a></td>
+	<td class="summary">Reroutes the joystickreleased callback to the currently active screen.</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#joystickremoved">joystickremoved (joystick)</a></td>
+	<td class="summary">Reroutes the joystickremoved callback to the currently active screen.</td>
+	</tr>
 </table>
 
 <br/>
@@ -168,7 +200,7 @@
     <dl class="function">
     <dt>
     <a name = "init"></a>
-    <strong>init (nscreens, screen)</strong>
+    <strong>init (nscreens, screen, ...)</strong>
     </dt>
     <dd>
     Initialise the ScreenManager.
@@ -186,7 +218,9 @@
            (string) The key of the first screen to push to the stack.
                            Use the key under which the screen in question is
                            stored in the nscreens table.
-
+        </li>
+        <li><span class="parameter">...</span>
+              (vararg) One or multiple arguments passed to the new screen.
         </li>
     </ul>
 
@@ -858,6 +892,190 @@
 
 
 </dd>
+    <dt>
+    <a name = "gamepadaxis"></a>
+    <strong>gamepadaxis (joystick, axis, value)</strong>
+    </dt>
+    <dd>
+    Reroutes the gamepadaxis callback to the currently active screen.
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">joystick</span>
+         (Joystick)    The joystick object.
+        </li>
+        <li><span class="parameter">axis</span>
+             (GamepadAxis) The joystick object.
+        </li>
+        <li><span class="parameter">value</span>
+            (number)      The new axis value.
+        </li>
+    </ul>
+
+
+
+
+
+</dd>
+    <dt>
+    <a name = "gamepadpressed"></a>
+    <strong>gamepadpressed (joystick, button)</strong>
+    </dt>
+    <dd>
+    Reroutes the gamepadpressed callback to the currently active screen.
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">joystick</span>
+         (Joystick)      The joystick object.
+        </li>
+        <li><span class="parameter">button</span>
+           (GamepadButton) The virtual gamepad button.
+        </li>
+    </ul>
+
+
+
+
+
+</dd>
+    <dt>
+    <a name = "gamepadreleased"></a>
+    <strong>gamepadreleased (joystick, button)</strong>
+    </dt>
+    <dd>
+    Reroutes the gamepadreleased callback to the currently active screen.
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">joystick</span>
+         (Joystick)      The joystick object.
+        </li>
+        <li><span class="parameter">button</span>
+           (GamepadButton) The virtual gamepad button.
+        </li>
+    </ul>
+
+
+
+
+
+</dd>
+    <dt>
+    <a name = "joystickadded"></a>
+    <strong>joystickadded (joystick)</strong>
+    </dt>
+    <dd>
+    Reroutes the joystickadded callback to the currently active screen.
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">joystick</span>
+         (Joystick) The newly connected Joystick object.
+        </li>
+    </ul>
+
+
+
+
+
+</dd>
+    <dt>
+    <a name = "joystickhat"></a>
+    <strong>joystickhat (joystick, hat, direction)</strong>
+    </dt>
+    <dd>
+    Reroutes the joystickhat callback to the currently active screen.
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">joystick</span>
+          (Joystick)    The newly connected Joystick object.
+        </li>
+        <li><span class="parameter">hat</span>
+               (number)      The hat number.
+        </li>
+        <li><span class="parameter">direction</span>
+         (JoystickHat) The new hat direction.
+        </li>
+    </ul>
+
+
+
+
+
+</dd>
+    <dt>
+    <a name = "joystickpressed"></a>
+    <strong>joystickpressed (joystick, button)</strong>
+    </dt>
+    <dd>
+    Reroutes the joystickpressed callback to the currently active screen.
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">joystick</span>
+         (Joystick) The newly connected Joystick object.
+        </li>
+        <li><span class="parameter">button</span>
+           (number)   The button number.
+        </li>
+    </ul>
+
+
+
+
+
+</dd>
+    <dt>
+    <a name = "joystickreleased"></a>
+    <strong>joystickreleased (joystick, button)</strong>
+    </dt>
+    <dd>
+    Reroutes the joystickreleased callback to the currently active screen.
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">joystick</span>
+         (Joystick) The newly connected Joystick object.
+        </li>
+        <li><span class="parameter">button</span>
+           (number)   The button number.
+        </li>
+    </ul>
+
+
+
+
+
+</dd>
+    <dt>
+    <a name = "joystickremoved"></a>
+    <strong>joystickremoved (joystick)</strong>
+    </dt>
+    <dd>
+    Reroutes the joystickremoved callback to the currently active screen.
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">joystick</span>
+         (Joystick) The now-disconnected Joystick object.
+        </li>
+    </ul>
+
+
+
+
+
+</dd>
 </dl>
 
 
@@ -865,7 +1083,7 @@
 </div> <!-- id="main" -->
 <div id="about">
 <i>generated by <a href="http://github.com/stevedonovan/LDoc">LDoc 1.4.3</a></i>
-<i style="float:right;">Last updated 2016-01-30 02:44:09 </i>
+<i style="float:right;">Last updated 2016-01-30 03:19:01 </i>
 </div> <!-- id="about" -->
 </div> <!-- id="container" -->
 </body>
