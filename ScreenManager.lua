@@ -402,6 +402,78 @@ function ScreenManager.wheelmoved( x, y )
     ScreenManager.peek():wheelmoved( x, y );
 end
 
+---
+-- Reroutes the gamepadaxis callback to the currently active screen.
+-- @param joystick (Joystick)    The joystick object.
+-- @param axis     (GamepadAxis) The joystick object.
+-- @param value    (number)      The new axis value.
+--
+function ScreenManager.gamepadaxis( joystick, axis, value )
+    ScreenManager.peek():gamepadaxis( joystick, axis, value );
+end
+
+---
+-- Reroutes the gamepadpressed callback to the currently active screen.
+-- @param joystick (Joystick)      The joystick object.
+-- @param button   (GamepadButton) The virtual gamepad button.
+--
+function ScreenManager.gamepadpressed( joystick, button )
+    ScreenManager.peek():gamepadpressed( joystick, button );
+end
+
+---
+-- Reroutes the gamepadreleased callback to the currently active screen.
+-- @param joystick (Joystick)      The joystick object.
+-- @param button   (GamepadButton) The virtual gamepad button.
+--
+function ScreenManager.gamepadreleased( joystick, button )
+    ScreenManager.peek():gamepadreleased( joystick, button );
+end
+
+---
+-- Reroutes the joystickadded callback to the currently active screen.
+-- @param joystick (Joystick) The newly connected Joystick object.
+--
+function ScreenManager.joystickadded( joystick )
+    ScreenManager.peek():joystickadded( joystick );
+end
+
+---
+-- Reroutes the joystickhat callback to the currently active screen.
+-- @param joystick  (Joystick)    The newly connected Joystick object.
+-- @param hat       (number)      The hat number.
+-- @param direction (JoystickHat) The new hat direction.
+--
+function ScreenManager.joystickhat( joystick, hat, direction )
+    ScreenManager.peek():joystickhat( joystick, hat, direction );
+end
+
+---
+-- Reroutes the joystickpressed callback to the currently active screen.
+-- @param joystick (Joystick) The newly connected Joystick object.
+-- @param button   (number)   The button number.
+--
+function ScreenManager.joystickpressed( joystick, button )
+    ScreenManager.peek():joystickpressed( joystick, button );
+end
+
+---
+-- Reroutes the joystickreleased callback to the currently active screen.
+-- @param joystick (Joystick) The newly connected Joystick object.
+-- @param button   (number)   The button number.
+--
+function ScreenManager.joystickreleased( joystick, button )
+    ScreenManager.peek():joystickreleased( joystick, button );
+end
+
+---
+-- Reroutes the joystickremoved callback to the currently active screen.
+-- @param joystick (Joystick) The now-disconnected Joystick object.
+--
+function ScreenManager.joystickremoved( joystick )
+    ScreenManager.peek():joystickremoved( joystick );
+end
+
 -- ------------------------------------------------
 -- Return Module
 -- ------------------------------------------------
