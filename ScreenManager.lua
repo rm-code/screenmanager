@@ -193,7 +193,7 @@ end
 --                                delay between key repeats depends on the
 --                                user's system settings.
 --
-function ScreenManager.keypressed(  key, scancode, isrepeat )
+function ScreenManager.keypressed( key, scancode, isrepeat )
     ScreenManager.peek():keypressed( key, scancode, isrepeat );
 end
 
