@@ -1,6 +1,6 @@
 --===============================================================================--
 --                                                                               --
--- Copyright (c) 2014 - 2016 Robert Machmer                                      --
+-- Copyright (c) 2014 - 2017 Robert Machmer                                      --
 --                                                                               --
 -- This software is provided 'as-is', without any express or implied             --
 -- warranty. In no event will the authors be held liable for any damages         --
@@ -21,7 +21,7 @@
 --===============================================================================--
 
 local ScreenManager = {
-    _VERSION     = '1.8.0',
+    _VERSION     = '1.8.1',
     _DESCRIPTION = 'Screen/State Management for the LÖVE framework',
     _URL         = 'https://github.com/rm-code/screenmanager/',
 };
@@ -193,7 +193,7 @@ end
 --                                delay between key repeats depends on the
 --                                user's system settings.
 --
-function ScreenManager.keypressed(  key, scancode, isrepeat )
+function ScreenManager.keypressed( key, scancode, isrepeat )
     ScreenManager.peek():keypressed( key, scancode, isrepeat );
 end
 
