@@ -10,6 +10,8 @@ It also offers hooks for most of LÖVE's callback functions. Based on the type o
 
 ## Example
 
+> For a more complete example check out the [example branch](https://github.com/rm-code/screenmanager/tree/example) in this repository.
+
 This is a simple example of how the ScreenManager should be used (note: You will have to change the paths in the example to fit your setup).
 
 ```lua
