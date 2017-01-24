@@ -1,7 +1,7 @@
 #ScreenManager
 
-[![Version](https://img.shields.io/badge/Version-1.8.0-blue.svg)](https://github.com/rm-code/screenmanager/releases/latest)
-[![LOVE](https://img.shields.io/badge/L%C3%96VE-0.10.0-EA316E.svg)](http://love2d.org/)
+[![Version](https://img.shields.io/badge/Version-1.8.1-blue.svg)](https://github.com/rm-code/screenmanager/releases/latest)
+[![LOVE](https://img.shields.io/badge/L%C3%96VE-0.10.2-EA316E.svg)](http://love2d.org/)
 [![License](http://img.shields.io/badge/Licence-zlib-brightgreen.svg)](LICENSE.md)
 
 The ScreenManager library is a state manager at heart which allows some nifty things, like stacking multiple screens on top of each other.
