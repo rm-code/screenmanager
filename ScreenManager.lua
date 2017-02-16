@@ -33,6 +33,11 @@ local ScreenManager = {
 local stack;
 local screens;
 
+local next;
+local args;
+local doclear;
+local dopop;
+
 -- ------------------------------------------------
 -- Private Functions
 -- ------------------------------------------------
@@ -47,9 +52,63 @@ local function clear()
     end
 end
 
+---
+-- Check if the screen is valid or error if not
+--
+local function validScreen( screen )
+    if not screens[screen] then
+        local str = "{";
+
+        for i, _ in pairs(screens) do
+            str = str .. i .. ', ';
+        end
+
+        str = str:sub(1, -3) .. "}";
+
+        error('"' .. tostring(screen) .. '" is not a valid screen. You will have to add a new one to your screen list or use one of the existing screens: ' .. str, 3);
+    end
+end
+
 -- ------------------------------------------------
 -- Public Functions
 -- ------------------------------------------------
+
+---
+-- If there was a change of screen, change it immediatly
+--
+function ScreenManager.performChange ()
+    if dopop then
+        -- Close the currently active screen.
+        local tmp = ScreenManager.peek();
+
+        -- Remove the now inactive screen from the stack.
+        stack[#stack] = nil;
+
+        -- Close the previous screen.
+        tmp:close();
+
+        -- Activate next screen on the stack.
+        ScreenManager.peek():setActive(true);
+
+        dopop = false;
+    elseif next then
+        if doclear then
+            clear();
+        end
+
+        if ScreenManager.peek() then
+            ScreenManager.peek():setActive(false);
+        end
+
+        -- Push the new screen onto the stack.
+        stack[#stack + 1] = screens[next].new();
+
+        -- Create the new screen and initialise it.
+        stack[#stack]:init(unpack(args));
+
+        doclear, next, args = false, nil, nil;
+    end
+end
 
 ---
 -- Initialise the ScreenManager.
@@ -66,6 +125,7 @@ function ScreenManager.init( nscreens, screen, ... )
     stack = {};
     screens = nscreens;
     ScreenManager.push( screen, ... );
+    ScreenManager.performChange();
 end
 
 ---
@@ -76,8 +136,11 @@ end
 -- @param ...    (vararg) One or multiple arguments passed to the new screen.
 --
 function ScreenManager.switch( screen, ... )
-    clear();
-    ScreenManager.push( screen, ... );
+    validScreen( screen );
+    next = screen;
+    args = { ... };
+    doclear = true;
+    dopop = false;
 end
 
 ---
@@ -89,25 +152,11 @@ end
 -- @param ...    (vararg) One or multiple arguments passed to the new screen.
 --
 function ScreenManager.push( screen, ... )
-    -- Deactivate the previous screen if there is one.
-    if ScreenManager.peek() then
-        ScreenManager.peek():setActive( false );
-    end
-
-    -- Push the new screen onto the stack.
-    if screens[screen] then
-        stack[#stack + 1] = screens[screen].new();
-    else
-        local str = "{";
-        for i, _ in pairs( screens ) do
-            str = str .. i .. ', ';
-        end
-        str = str .. "}";
-        error('"' .. screen .. '" is not a valid screen. You will have to add a new one to your screen list or use one of the existing screens: ' .. str);
-    end
-
-    -- Create the new screen and initialise it.
-    stack[#stack]:init( ... );
+    validScreen( screen );
+    next = screen;
+    args = { ... };
+    doclear = false;
+    dopop = false;
 end
 
 ---
@@ -123,21 +172,10 @@ end
 -- @return (table) The screen on top of the stack.
 --
 function ScreenManager.pop()
-    if #stack > 1 then
-        -- Close the currently active screen.
-        local tmp = ScreenManager.peek();
-
-        -- Remove the now inactive screen from the stack.
-        stack[#stack] = nil;
-
-        -- Close the previous screen.
-        tmp:close();
-
-        -- Activate next screen on the stack.
-        ScreenManager.peek():setActive( true );
-    else
-        error("Can't close the last screen. Use switch() to clear the screen manager and add a new screen.");
-    end
+    next = nil;
+    args = nil;
+    doclear = false;
+    dopop = true;
 end
 
 -- ------------------------------------------------
@@ -164,6 +202,8 @@ function ScreenManager.draw()
     for i = 1, #stack do
         stack[i]:draw();
     end
+
+    ScreenManager.performChange()
 end
 
 ---
