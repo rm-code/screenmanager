@@ -23,6 +23,15 @@
 local Screen = {};
 
 -- ------------------------------------------------
+-- Private Functions
+-- ------------------------------------------------
+
+---
+-- No operation function
+--
+local function null() end
+
+-- ------------------------------------------------
 -- Module
 -- ------------------------------------------------
 
@@ -35,9 +44,9 @@ function Screen.new()
     -- Public Methods
     -- ------------------------------------------------
 
-    function self:init() end
+    self.init = null;
 
-    function self:close() end
+    self.close = null;
 
     function self:isActive()
         return active;
@@ -51,67 +60,67 @@ function Screen.new()
     -- Callback-stubs
     -- ------------------------------------------------
 
-    function self:directorydropped() end
+    self.directorydropped = null
 
-    function self:draw() end
+    self.draw = null;
 
-    function self:filedropped() end
+    self.filedropped = null;
 
-    function self:focus() end
+    self.focus = null;
 
-    function self:keypressed() end
+    self.keypressed = null;
 
-    function self:keyreleased() end
+    self.keyreleased = null;
 
-    function self:lowmemory() end
+    self.lowmemory = null;
 
-    function self:mousefocus() end
+    self.mousefocus = null;
 
-    function self:mousemoved() end
+    self.mousemoved = null;
 
-    function self:mousepressed() end
+    self.mousepressed = null;
 
-    function self:mousereleased() end
+    self.mousereleased = null;
 
-    function self:quit() end
+    self.quit = null;
 
-    function self:resize() end
+    self.resize = null;
 
-    function self:textedited() end
+    self.textedited = null;
 
-    function self:textinput() end
+    self.textinput = null;
 
-    function self:threaderror() end
+    self.threaderror = null;
 
-    function self:touchmoved() end
+    self.touchmoved = null;
 
-    function self:touchpressed() end
+    self.touchpressed = null;
 
-    function self:touchreleased() end
+    self.touchreleased = null;
 
-    function self:update() end
+    self.update = null;
 
-    function self:visible() end
+    self.visible = null;
 
-    function self:wheelmoved() end
+    self.wheelmoved = null;
 
-    function self:gamepadaxis() end
+    self.gamepadaxis = null;
 
-    function self:gamepadpressed() end
+    self.gamepadpressed = null;
 
-    function self:gamepadreleased() end
+    self.gamepadreleased = null;
 
-    function self:joystickadded() end
+    self.joystickadded = null;
 
-    function self:joystickaxis() end
+    self.joystickaxis = null;
 
-    function self:joystickhat() end
+    self.joystickhat = null;
 
-    function self:joystickpressed() end
+    self.joystickpressed = null;
 
-    function self:joystickreleased() end
+    self.joystickreleased = null;
 
-    function self:joystickremoved() end
+    self.joystickremoved = null;
 
     return self;
 end
