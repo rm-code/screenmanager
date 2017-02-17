@@ -34,6 +34,12 @@ local stack;
 local screens;
 local change;
 
+local allcallbacks = { 'draw', 'update' }
+
+for name in pairs( love.handlers ) do
+    allcallbacks[#allcallbacks + 1] = name
+end
+
 -- ------------------------------------------------
 -- Private Functions
 -- ------------------------------------------------
@@ -96,6 +102,11 @@ local function validateScreen( screen )
         error('"' .. tostring( screen ) .. '" is not a valid screen. You will have to add a new one to your screen list or use one of the existing screens: ' .. str, 3);
     end
 end
+
+---
+-- No operation function
+--
+local function null() end
 
 -- ------------------------------------------------
 -- Public Functions
@@ -520,6 +531,25 @@ end
 --
 function ScreenManager.joystickremoved( joystick )
     ScreenManager.peek():joystickremoved( joystick );
+end
+
+---
+-- Register to multiple LÖVE callbacks, defaults to all.
+-- @param callbacks (table) Table with the names of the callbacks to register to.
+--
+function ScreenManager.registerCallbacks( callbacks )
+  local registry = {};
+  callbacks = callbacks or allcallbacks;
+
+  for _, f in ipairs( callbacks ) do
+    registry[f] = love[f] or null;
+
+    love[f] = function( ... )
+      registry[f]( ... );
+      return ScreenManager[f]( ... );
+    end
+
+  end
 end
 
 -- ------------------------------------------------
