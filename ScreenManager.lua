@@ -83,7 +83,7 @@ end
 ---
 -- Check if the screen is valid or error if not
 --
-local function isValidScreen( screen )
+local function validateScreen( screen )
     if not screens[screen] then
         local str = "{";
 
@@ -136,7 +136,7 @@ function ScreenManager.init( nscreens, screen, ... )
     stack = {};
     screens = nscreens;
 
-    isValidScreen( screen );
+    validateScreen( screen );
 
     ScreenManager.push( screen, ... );
     ScreenManager.performChange();
@@ -150,7 +150,7 @@ end
 -- @param ...    (vararg) One or multiple arguments passed to the new screen.
 --
 function ScreenManager.switch( screen, ... )
-    isValidScreen( screen );
+    validateScreen( screen );
     change = { action = 'switch', screen = screen, args = { ... } };
 end
 
@@ -163,7 +163,7 @@ end
 -- @param ...    (vararg) One or multiple arguments passed to the new screen.
 --
 function ScreenManager.push( screen, ... )
-    isValidScreen( screen );
+    validateScreen( screen );
     change = { action = 'push', screen = screen, args = { ... } };
 end
 
