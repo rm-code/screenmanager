@@ -176,8 +176,7 @@ function ScreenManager.peek()
 end
 
 ---
--- Removes and returns the topmost screen of the stack.
--- @return (table) The screen on top of the stack.
+-- Removes the topmost screen of the stack.
 --
 function ScreenManager.pop()
     if #stack > 1 then
