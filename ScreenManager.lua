@@ -32,6 +32,7 @@ local ScreenManager = {
 
 local stack;
 local screens;
+local change;
 
 -- ------------------------------------------------
 -- Private Functions
@@ -47,9 +48,78 @@ local function clear()
     end
 end
 
+---
+-- Close and pop the current active state and activate the one beneath it
+--
+local function pop()
+    -- Close the currently active screen.
+    local tmp = ScreenManager.peek();
+
+    -- Remove the now inactive screen from the stack.
+    stack[#stack] = nil;
+
+    -- Close the previous screen.
+    tmp:close();
+
+    -- Activate next screen on the stack.
+    ScreenManager.peek():setActive( true );
+end
+
+---
+-- Deactivate the current state, push a new state and initialize it
+--
+local function push( screen, args )
+  if ScreenManager.peek() then
+      ScreenManager.peek():setActive( false );
+  end
+
+  -- Push the new screen onto the stack.
+  stack[#stack + 1] = screens[screen].new();
+
+  -- Create the new screen and initialise it.
+  stack[#stack]:init( unpack( args ) );
+end
+
+---
+-- Check if the screen is valid or error if not
+--
+local function validateScreen( screen )
+    if not screens[screen] then
+        local str = "{";
+
+        for i, _ in pairs( screens ) do
+            str = str .. i .. ', ';
+        end
+
+        str = str:sub( 1, -3 ) .. "}";
+
+        error('"' .. tostring( screen ) .. '" is not a valid screen. You will have to add a new one to your screen list or use one of the existing screens: ' .. str, 3);
+    end
+end
+
 -- ------------------------------------------------
 -- Public Functions
 -- ------------------------------------------------
+
+---
+-- If there was a change of screen, change it immediatly
+--
+function ScreenManager.performChange()
+    if not change then
+        return
+    end
+
+    if change.action == 'pop' then
+        pop();
+    elseif change.action == 'switch' then
+        clear();
+        push( change.screen, change.args );
+    elseif change.action == 'push' then
+        push( change.screen, change.args );
+    end
+
+    change = nil;
+end
 
 ---
 -- Initialise the ScreenManager.
@@ -65,7 +135,11 @@ end
 function ScreenManager.init( nscreens, screen, ... )
     stack = {};
     screens = nscreens;
+
+    validateScreen( screen );
+
     ScreenManager.push( screen, ... );
+    ScreenManager.performChange();
 end
 
 ---
@@ -76,8 +150,8 @@ end
 -- @param ...    (vararg) One or multiple arguments passed to the new screen.
 --
 function ScreenManager.switch( screen, ... )
-    clear();
-    ScreenManager.push( screen, ... );
+    validateScreen( screen );
+    change = { action = 'switch', screen = screen, args = { ... } };
 end
 
 ---
@@ -89,25 +163,8 @@ end
 -- @param ...    (vararg) One or multiple arguments passed to the new screen.
 --
 function ScreenManager.push( screen, ... )
-    -- Deactivate the previous screen if there is one.
-    if ScreenManager.peek() then
-        ScreenManager.peek():setActive( false );
-    end
-
-    -- Push the new screen onto the stack.
-    if screens[screen] then
-        stack[#stack + 1] = screens[screen].new();
-    else
-        local str = "{";
-        for i, _ in pairs( screens ) do
-            str = str .. i .. ', ';
-        end
-        str = str .. "}";
-        error('"' .. screen .. '" is not a valid screen. You will have to add a new one to your screen list or use one of the existing screens: ' .. str);
-    end
-
-    -- Create the new screen and initialise it.
-    stack[#stack]:init( ... );
+    validateScreen( screen );
+    change = { action = 'push', screen = screen, args = { ... } };
 end
 
 ---
@@ -119,24 +176,13 @@ function ScreenManager.peek()
 end
 
 ---
--- Removes and returns the topmost screen of the stack.
--- @return (table) The screen on top of the stack.
+-- Removes the topmost screen of the stack.
 --
 function ScreenManager.pop()
     if #stack > 1 then
-        -- Close the currently active screen.
-        local tmp = ScreenManager.peek();
-
-        -- Remove the now inactive screen from the stack.
-        stack[#stack] = nil;
-
-        -- Close the previous screen.
-        tmp:close();
-
-        -- Activate next screen on the stack.
-        ScreenManager.peek():setActive( true );
+        change = { action = 'pop' };
     else
-        error("Can't close the last screen. Use switch() to clear the screen manager and add a new screen.");
+        error("Can't close the last screen. Use switch() to clear the screen manager and add a new screen.", 2);
     end
 end
 
@@ -164,6 +210,8 @@ function ScreenManager.draw()
     for i = 1, #stack do
         stack[i]:draw();
     end
+
+    ScreenManager.performChange()
 end
 
 ---
