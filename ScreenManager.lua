@@ -32,7 +32,9 @@ local ScreenManager = {
 
 local stack;
 local screens;
-local change;
+
+local changes = {};
+local height = 0 --Stack height
 
 -- ------------------------------------------------
 -- Private Functions
@@ -105,20 +107,22 @@ end
 -- If there was a change of screen, change it immediatly
 --
 function ScreenManager.performChange()
-    if not change then
+    if #changes == 0 then
         return
     end
 
-    if change.action == 'pop' then
-        pop();
-    elseif change.action == 'switch' then
-        clear();
-        push( change.screen, change.args );
-    elseif change.action == 'push' then
-        push( change.screen, change.args );
+    for _, change in ipairs( changes ) do
+      if change.action == 'pop' then
+          pop();
+      elseif change.action == 'switch' then
+          clear();
+          push( change.screen, change.args );
+      elseif change.action == 'push' then
+          push( change.screen, change.args );
+      end
     end
 
-    change = nil;
+    changes = {}
 end
 
 ---
@@ -151,7 +155,8 @@ end
 --
 function ScreenManager.switch( screen, ... )
     validateScreen( screen );
-    change = { action = 'switch', screen = screen, args = { ... } };
+    height = 1;
+    changes[#changes + 1] = { action = 'switch', screen = screen, args = { ... } };
 end
 
 ---
@@ -164,7 +169,8 @@ end
 --
 function ScreenManager.push( screen, ... )
     validateScreen( screen );
-    change = { action = 'push', screen = screen, args = { ... } };
+    height = height + 1;
+    changes[#changes + 1] = { action = 'push', screen = screen, args = { ... } };
 end
 
 ---
@@ -179,8 +185,9 @@ end
 -- Removes the topmost screen of the stack.
 --
 function ScreenManager.pop()
-    if #stack > 1 then
-        change = { action = 'pop' };
+    if height > 1 then
+        height = height - 1;
+        changes[#changes + 1] = { action = 'pop' };
     else
         error("Can't close the last screen. Use switch() to clear the screen manager and add a new screen.", 2);
     end
