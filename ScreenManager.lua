@@ -529,6 +529,32 @@ function ScreenManager.joystickremoved( joystick )
     ScreenManager.peek():joystickremoved( joystick );
 end
 
+---
+-- Register to multiple LÖVE callbacks, defaults to all.
+-- @param callbacks (table) Table with the names of the callbacks to register to.
+--
+function ScreenManager.registerCallbacks( callbacks )
+    local registry = {};
+    local function null() end
+
+    if type( callbacks ) ~= "table" then
+        callbacks = {};
+
+        for name in pairs( love.handlers ) do
+            callbacks[#callbacks + 1] = name;
+        end
+    end
+
+    for _, f in ipairs( callbacks ) do
+        registry[f] = love[f] or null;
+
+        love[f] = function( ... )
+            registry[f]( ... );
+            return ScreenManager[f]( ... );
+        end
+    end
+end
+
 -- ------------------------------------------------
 -- Return Module
 -- ------------------------------------------------
