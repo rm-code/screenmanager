@@ -537,8 +537,8 @@ function ScreenManager.registerCallbacks( callbacks )
     local registry = {}
     local function null() end
 
-    if type( callbacks ) ~= "table" then
-        callbacks = {}
+    if type( callbacks ) ~= 'table' then
+        callbacks = { 'update', 'draw' }
 
         for name in pairs( love.handlers ) do
             callbacks[#callbacks + 1] = name
