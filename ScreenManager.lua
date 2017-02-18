@@ -97,11 +97,6 @@ local function validateScreen( screen )
     end
 end
 
----
--- No operation function
---
-local function null() end
-
 -- ------------------------------------------------
 -- Public Functions
 -- ------------------------------------------------
@@ -533,6 +528,7 @@ end
 --
 function ScreenManager.registerCallbacks( callbacks )
     local registry = {};
+    local function null() end
 
     if type( callbacks ) ~= "table" then
         callbacks = {};
