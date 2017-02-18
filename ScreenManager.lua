@@ -142,7 +142,7 @@ function ScreenManager.init( nscreens, screen, ... )
 
     validateScreen( screen )
 
-    ScreenManager.push( screen, ... )
+    ScreenManager.switch( screen, ... )
     ScreenManager.performChanges()
 end
 
