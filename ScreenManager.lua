@@ -106,7 +106,7 @@ end
 ---
 -- If there was a change of screen, change it immediatly
 --
-function ScreenManager.performChange()
+function ScreenManager.performChanges()
     if #changes == 0 then
         return
     end
@@ -143,7 +143,7 @@ function ScreenManager.init( nscreens, screen, ... )
     validateScreen( screen );
 
     ScreenManager.push( screen, ... );
-    ScreenManager.performChange();
+    ScreenManager.performChanges();
 end
 
 ---
@@ -218,7 +218,7 @@ function ScreenManager.draw()
         stack[i]:draw();
     end
 
-    ScreenManager.performChange()
+    ScreenManager.performChanges()
 end
 
 ---
