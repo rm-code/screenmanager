@@ -21,7 +21,7 @@
 --===============================================================================--
 
 local ScreenManager = {
-    _VERSION     = '2.0.0',
+    _VERSION     = '2.0.1',
     _DESCRIPTION = 'Screen/State Management for the LÖVE framework',
     _URL         = 'https://github.com/rm-code/screenmanager/',
 }
@@ -142,7 +142,7 @@ function ScreenManager.init( nscreens, screen, ... )
 
     validateScreen( screen )
 
-    ScreenManager.push( screen, ... )
+    ScreenManager.switch( screen, ... )
     ScreenManager.performChanges()
 end
 
@@ -537,8 +537,8 @@ function ScreenManager.registerCallbacks( callbacks )
     local registry = {}
     local function null() end
 
-    if type( callbacks ) ~= "table" then
-        callbacks = {}
+    if type( callbacks ) ~= 'table' then
+        callbacks = { 'update', 'draw' }
 
         for name in pairs( love.handlers ) do
             callbacks[#callbacks + 1] = name
