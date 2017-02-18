@@ -44,7 +44,7 @@ local height = 0 --Stack height
 -- Close and remove all screens from the stack.
 --
 local function clear()
-    for i = 1, #stack do
+    for i = #stack, 1, -1 do
         stack[i]:close();
         stack[i] = nil;
     end
