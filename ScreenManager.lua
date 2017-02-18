@@ -21,7 +21,7 @@
 --===============================================================================--
 
 local ScreenManager = {
-    _VERSION     = '1.8.1',
+    _VERSION     = '2.0.0',
     _DESCRIPTION = 'Screen/State Management for the LÖVE framework',
     _URL         = 'https://github.com/rm-code/screenmanager/',
 }

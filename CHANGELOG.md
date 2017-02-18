@@ -1,3 +1,9 @@
+## Version 2.0.0 ( 2017-02-18 )
+- LÖVE callbacks can now be registered to the ScreenManager functions
+- Screen pushing, popping and switching is delayed until the end of the current frame's draw function
+    - Changes can still be applied directly if needed by calling `ScreenManager.performChanges`
+- Use a single "null" function for the callback-stubs
+
 ## Version 1.8.0 ( 2016-01-30 )
 - Add gamepad and joystick callbacks
 - Add love.threaderror
