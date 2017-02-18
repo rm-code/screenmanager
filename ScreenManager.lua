@@ -34,11 +34,28 @@ local stack;
 local screens;
 local change;
 
-local allcallbacks = { 'draw', 'update' }
-
-for name in pairs( love.handlers ) do
-    allcallbacks[#allcallbacks + 1] = name
-end
+local allcallbacks = {
+    'directorydropped',
+    'draw',
+    'filedropped',
+    'focus',
+    'keypressed',
+    'keyreleased',
+    'lowmemory',
+    'mousefocus',
+    'mousemoved',
+    'mousepressed',
+    'mousereleased',
+    'quit',
+    'resize',
+    'textedited',
+    'textinput',
+    'threaderror',
+    'touchmoved',
+    'touchpressed',
+    'touchreleased',
+    'update',
+}
 
 -- ------------------------------------------------
 -- Private Functions
@@ -548,7 +565,6 @@ function ScreenManager.registerCallbacks( callbacks )
       registry[f]( ... );
       return ScreenManager[f]( ... );
     end
-
   end
 end
 
