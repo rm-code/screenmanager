@@ -34,29 +34,6 @@ local stack;
 local screens;
 local change;
 
-local allcallbacks = {
-    'directorydropped',
-    'draw',
-    'filedropped',
-    'focus',
-    'keypressed',
-    'keyreleased',
-    'lowmemory',
-    'mousefocus',
-    'mousemoved',
-    'mousepressed',
-    'mousereleased',
-    'quit',
-    'resize',
-    'textedited',
-    'textinput',
-    'threaderror',
-    'touchmoved',
-    'touchpressed',
-    'touchreleased',
-    'update',
-}
-
 -- ------------------------------------------------
 -- Private Functions
 -- ------------------------------------------------
@@ -555,17 +532,24 @@ end
 -- @param callbacks (table) Table with the names of the callbacks to register to.
 --
 function ScreenManager.registerCallbacks( callbacks )
-  local registry = {};
-  callbacks = callbacks or allcallbacks;
+    local registry = {};
 
-  for _, f in ipairs( callbacks ) do
-    registry[f] = love[f] or null;
+    if type( callbacks ) ~= "table" then
+        callbacks = {};
 
-    love[f] = function( ... )
-      registry[f]( ... );
-      return ScreenManager[f]( ... );
+        for name in pairs( love.handlers ) do
+            callbacks[#callbacks + 1] = name;
+        end
     end
-  end
+
+    for _, f in ipairs( callbacks ) do
+        registry[f] = love[f] or null;
+
+        love[f] = function( ... )
+            registry[f]( ... );
+            return ScreenManager[f]( ... );
+        end
+    end
 end
 
 -- ------------------------------------------------
