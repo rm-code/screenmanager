@@ -27,9 +27,11 @@ local Screen = {};
 -- ------------------------------------------------
 
 ---
--- No operation function
+-- Function stub.
 --
-local function null() end
+local function null()
+    return;
+end
 
 -- ------------------------------------------------
 -- Module
@@ -44,82 +46,50 @@ function Screen.new()
     -- Public Methods
     -- ------------------------------------------------
 
-    self.init = null;
-
-    self.close = null;
-
     function self:isActive()
         return active;
     end
 
-    function self:setActive( dactiv )
-        active = dactiv;
+    function self:setActive( nactiv )
+        active = nactiv;
     end
 
     -- ------------------------------------------------
     -- Callback-stubs
     -- ------------------------------------------------
 
+    self.init = null;
+    self.close = null;
     self.directorydropped = null
-
     self.draw = null;
-
     self.filedropped = null;
-
     self.focus = null;
-
     self.keypressed = null;
-
     self.keyreleased = null;
-
     self.lowmemory = null;
-
     self.mousefocus = null;
-
     self.mousemoved = null;
-
     self.mousepressed = null;
-
     self.mousereleased = null;
-
     self.quit = null;
-
     self.resize = null;
-
     self.textedited = null;
-
     self.textinput = null;
-
     self.threaderror = null;
-
     self.touchmoved = null;
-
     self.touchpressed = null;
-
     self.touchreleased = null;
-
     self.update = null;
-
     self.visible = null;
-
     self.wheelmoved = null;
-
     self.gamepadaxis = null;
-
     self.gamepadpressed = null;
-
     self.gamepadreleased = null;
-
     self.joystickadded = null;
-
     self.joystickaxis = null;
-
     self.joystickhat = null;
-
     self.joystickpressed = null;
-
     self.joystickreleased = null;
-
     self.joystickremoved = null;
 
     return self;
