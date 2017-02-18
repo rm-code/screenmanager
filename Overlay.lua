@@ -6,13 +6,12 @@ local Overlay = {}
 function Overlay.new()
     local self = Screen.new() -- Note how we inherit from the Screen class.
 
-    local x, y, w, h = 0, 0, love.graphics.getDimensions()
-    local font = love.graphics.newFont( 20 )
-    love.graphics.setFont( font )
-    local str
+    local x, y, w, h, str, font
 
     function self:init( nstr )
-        str = nstr
+        x, y, w, h = 0, 0, love.graphics.getDimensions()
+        str, font = nstr, love.graphics.newFont( 20 )
+        love.graphics.setFont( font )
     end
 
     function self:draw()

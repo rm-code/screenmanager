@@ -10,18 +10,8 @@ function love.load()
 
     -- Apply the list to the ScreenManager and create the first screen.
     ScreenManager.init( screens, 'main' )
-end
 
--- As you can see all love callbacks are simply redirected to the screens in
--- the ScreenManager library.
-function love.draw()
-    ScreenManager.draw()
-end
-
-function love.update( dt )
-    ScreenManager.update( dt )
-end
-
-function love.keypressed( key )
-    ScreenManager.keypressed( key )
+    -- Register the ScreenManager functions to the LÖVE callbacks so that
+    -- they will be called automagically.
+    ScreenManager.registerCallbacks()
 end
