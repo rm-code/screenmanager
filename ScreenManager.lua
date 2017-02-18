@@ -99,31 +99,31 @@ local function validateScreen( screen )
     end
 end
 
--- ------------------------------------------------
--- Public Functions
--- ------------------------------------------------
-
 ---
 -- If there was a change of screen, change it immediatly
 --
-function ScreenManager.performChanges()
+local function performChanges()
     if #changes == 0 then
         return
     end
 
     for _, change in ipairs( changes ) do
-      if change.action == 'pop' then
-          pop();
-      elseif change.action == 'switch' then
-          clear();
-          push( change.screen, change.args );
-      elseif change.action == 'push' then
-          push( change.screen, change.args );
-      end
+        if change.action == 'pop' then
+            pop();
+        elseif change.action == 'switch' then
+            clear();
+            push( change.screen, change.args );
+        elseif change.action == 'push' then
+            push( change.screen, change.args );
+        end
     end
 
     changes = {}
 end
+
+-- ------------------------------------------------
+-- Public Functions
+-- ------------------------------------------------
 
 ---
 -- Initialise the ScreenManager.
@@ -143,7 +143,7 @@ function ScreenManager.init( nscreens, screen, ... )
     validateScreen( screen );
 
     ScreenManager.push( screen, ... );
-    ScreenManager.performChanges();
+    performChanges();
 end
 
 ---
@@ -218,7 +218,7 @@ function ScreenManager.draw()
         stack[i]:draw();
     end
 
-    ScreenManager.performChanges()
+    performChanges()
 end
 
 ---
