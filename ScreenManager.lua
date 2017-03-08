@@ -27,6 +27,17 @@ local ScreenManager = {
 }
 
 -- ------------------------------------------------
+-- Constants
+-- ------------------------------------------------
+
+local ERROR_MSG = [[
+"%s" is not a valid screen!
+
+You will have to add a new one to your screen list or use one of the existing screens:
+
+%s]]
+
+-- ------------------------------------------------
 -- Local Variables
 -- ------------------------------------------------
 
@@ -95,7 +106,7 @@ local function validateScreen( screen )
 
         str = str:sub( 1, -3 ) .. "}"
 
-        error('"' .. tostring( screen ) .. '" is not a valid screen. You will have to add a new one to your screen list or use one of the existing screens: ' .. str, 3)
+        error( string.format( ERROR_MSG, tostring( screen ), str ), 3 )
     end
 end
 
