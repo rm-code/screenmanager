@@ -27,6 +27,17 @@ local ScreenManager = {
 }
 
 -- ------------------------------------------------
+-- Constants
+-- ------------------------------------------------
+
+local ERROR_MSG = [[
+"%s" is not a valid screen!
+
+You will have to add a new one to your screen list or use one of the existing screens:
+
+%s]]
+
+-- ------------------------------------------------
 -- Local Variables
 -- ------------------------------------------------
 
@@ -71,15 +82,15 @@ end
 -- Deactivate the current state, push a new state and initialize it
 --
 local function push( screen, args )
-  if ScreenManager.peek() then
-      ScreenManager.peek():setActive( false )
-  end
+    if ScreenManager.peek() then
+        ScreenManager.peek():setActive( false )
+    end
 
-  -- Push the new screen onto the stack.
-  stack[#stack + 1] = screens[screen].new()
+    -- Push the new screen onto the stack.
+    stack[#stack + 1] = screens[screen].new()
 
-  -- Create the new screen and initialise it.
-  stack[#stack]:init( unpack( args ) )
+    -- Create the new screen and initialise it.
+    stack[#stack]:init( unpack( args ) )
 end
 
 ---
@@ -95,7 +106,7 @@ local function validateScreen( screen )
 
         str = str:sub( 1, -3 ) .. "}"
 
-        error('"' .. tostring( screen ) .. '" is not a valid screen. You will have to add a new one to your screen list or use one of the existing screens: ' .. str, 3)
+        error( string.format( ERROR_MSG, tostring( screen ), str ), 3 )
     end
 end
 
@@ -112,14 +123,14 @@ function ScreenManager.performChanges()
     end
 
     for _, change in ipairs( changes ) do
-      if change.action == 'pop' then
-          pop()
-      elseif change.action == 'switch' then
-          clear()
-          push( change.screen, change.args )
-      elseif change.action == 'push' then
-          push( change.screen, change.args )
-      end
+        if change.action == 'pop' then
+            pop()
+        elseif change.action == 'switch' then
+            clear()
+            push( change.screen, change.args )
+        elseif change.action == 'push' then
+            push( change.screen, change.args )
+        end
     end
 
     changes = {}
