@@ -82,15 +82,15 @@ end
 -- Deactivate the current state, push a new state and initialize it
 --
 local function push( screen, args )
-  if ScreenManager.peek() then
-      ScreenManager.peek():setActive( false )
-  end
+    if ScreenManager.peek() then
+        ScreenManager.peek():setActive( false )
+    end
 
-  -- Push the new screen onto the stack.
-  stack[#stack + 1] = screens[screen].new()
+    -- Push the new screen onto the stack.
+    stack[#stack + 1] = screens[screen].new()
 
-  -- Create the new screen and initialise it.
-  stack[#stack]:init( unpack( args ) )
+    -- Create the new screen and initialise it.
+    stack[#stack]:init( unpack( args ) )
 end
 
 ---
@@ -123,14 +123,14 @@ function ScreenManager.performChanges()
     end
 
     for _, change in ipairs( changes ) do
-      if change.action == 'pop' then
-          pop()
-      elseif change.action == 'switch' then
-          clear()
-          push( change.screen, change.args )
-      elseif change.action == 'push' then
-          push( change.screen, change.args )
-      end
+        if change.action == 'pop' then
+            pop()
+        elseif change.action == 'switch' then
+            clear()
+            push( change.screen, change.args )
+        elseif change.action == 'push' then
+            push( change.screen, change.args )
+        end
     end
 
     changes = {}
