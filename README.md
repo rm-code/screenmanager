@@ -1,4 +1,4 @@
-#ScreenManager
+# ScreenManager
 
 [![Version](https://img.shields.io/badge/Version-2.0.1-blue.svg)](https://github.com/rm-code/screenmanager/releases/latest)
 [![LOVE](https://img.shields.io/badge/L%C3%96VE-0.10.2-EA316E.svg)](http://love2d.org/)
