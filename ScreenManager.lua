@@ -20,6 +20,11 @@
 --                                                                               --
 --===============================================================================--
 
+---
+-- The ScreenManager library is a state manager at heart which allows some nifty
+-- things, like stacking multiple screens on top of each other.
+-- @module ScreenManager
+--
 local ScreenManager = {
     _VERSION     = '2.0.1',
     _DESCRIPTION = 'Screen/State Management for the LÖVE framework',
