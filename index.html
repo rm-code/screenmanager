@@ -3,7 +3,7 @@
 <html>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
 <head>
-    <title>Reference</title>
+    <title>ScreenManager - Documentation</title>
     <link rel="stylesheet" href="ldoc.css" type="text/css" />
 </head>
 <body>
@@ -24,7 +24,7 @@
 
 <div id="navigation">
 <br/>
-<h1>ldoc</h1>
+<h1>ScreenManager</h1>
 
 
 <h2>Contents</h2>
@@ -43,22 +43,27 @@
 <div id="content">
 
 <h1>Module <code>ScreenManager</code></h1>
-<p>Close and remove all screens from the stack.</p>
+<p>The ScreenManager library is a state manager at heart which allows some nifty
+ things, like stacking multiple screens on top of each other.</p>
 <p></p>
 
 
 <h2><a href="#Functions">Functions</a></h2>
 <table class="function_list">
 	<tr>
-	<td class="name" nowrap><a href="#init">init (nscreens, screen, ...)</a></td>
-	<td class="summary">Initialise the ScreenManager.</td>
+	<td class="name" nowrap><a href="#performChanges">performChanges ()</a></td>
+	<td class="summary">This function is used internally by the ScreenManager library.</td>
 	</tr>
 	<tr>
-	<td class="name" nowrap><a href="#switch">switch (screen, ...)</a></td>
+	<td class="name" nowrap><a href="#init">init (nscreens, screen[, ...])</a></td>
+	<td class="summary">Initialises the ScreenManager library.</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#switch">switch (screen[, ...])</a></td>
 	<td class="summary">Switches to a screen.</td>
 	</tr>
 	<tr>
-	<td class="name" nowrap><a href="#push">push (screen, ...)</a></td>
+	<td class="name" nowrap><a href="#push">push (screen[, ...])</a></td>
 	<td class="summary">Pushes a new screen to the stack.</td>
 	</tr>
 	<tr>
@@ -67,7 +72,7 @@
 	</tr>
 	<tr>
 	<td class="name" nowrap><a href="#pop">pop ()</a></td>
-	<td class="summary">Removes and returns the topmost screen of the stack.</td>
+	<td class="summary">Removes the topmost screen of the stack.</td>
 	</tr>
 	<tr>
 	<td class="name" nowrap><a href="#directorydropped">directorydropped (path)</a></td>
@@ -189,6 +194,10 @@
 	<td class="name" nowrap><a href="#joystickremoved">joystickremoved (joystick)</a></td>
 	<td class="summary">Reroutes the joystickremoved callback to the currently active screen.</td>
 	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#registerCallbacks">registerCallbacks (callbacks)</a></td>
+	<td class="summary">Register to multiple LÖVE callbacks, defaults to all.</td>
+	</tr>
 </table>
 
 <br/>
@@ -199,28 +208,59 @@
 
     <dl class="function">
     <dt>
-    <a name = "init"></a>
-    <strong>init (nscreens, screen, ...)</strong>
+    <a name = "performChanges"></a>
+    <strong>performChanges ()</strong>
     </dt>
     <dd>
-    Initialise the ScreenManager.
- Sets up the ScreenManager and pushes the first screen.
+    This function is used internally by the ScreenManager library.
+ It performs all changes that have been added to the changes queue (FIFO) and
+ resets the queue afterwards.
+
+
+
+
+
+    <h3>See also:</h3>
+    <ul>
+         <li><a href="index.html#push">push</a></li>
+         <li><a href="index.html#pop">pop</a></li>
+         <li><a href="index.html#switch">switch</a></li>
+    </ul>
+
+
+</dd>
+    <dt>
+    <a name = "init"></a>
+    <strong>init (nscreens, screen[, ...])</strong>
+    </dt>
+    <dd>
+    Initialises the ScreenManager library.
+ It sets up the stack table, the list of screens to use and then proceeds with
+ validating and switching to the initial screen.
 
 
     <h3>Parameters:</h3>
     <ul>
         <li><span class="parameter">nscreens</span>
-         (table)  A table containing pointers to the different screen
-                           classes. The keys will are used to call a specific
-                           screen.
+            <span class="types"><a class="type" href="https://www.lua.org/manual/5.2/manual.html#6.5">table</a></span>
+
+                 A table containing pointers to the different screen classes.
+                 The keys will are used to call a specific screen.
         </li>
         <li><span class="parameter">screen</span>
-           (string) The key of the first screen to push to the stack.
-                           Use the key under which the screen in question is
-                           stored in the nscreens table.
+            <span class="types"><a class="type" href="https://www.lua.org/manual/5.2/manual.html#6.4">string</a></span>
+
+                 The key of the first screen to push to the stack. Use the
+                 key under which the screen in question is stored in the
+                 nscreens table.
         </li>
         <li><span class="parameter">...</span>
-              (vararg) One or multiple arguments passed to the new screen.
+            <span class="types"><span class="type">vararg</span></span>
+
+                 Aditional arguments which will be passed to the new
+                 screen's init function.
+
+         (<em>optional</em>)
         </li>
     </ul>
 
@@ -231,7 +271,7 @@
 </dd>
     <dt>
     <a name = "switch"></a>
-    <strong>switch (screen, ...)</strong>
+    <strong>switch (screen[, ...])</strong>
     </dt>
     <dd>
     Switches to a screen.
@@ -242,10 +282,17 @@
     <h3>Parameters:</h3>
     <ul>
         <li><span class="parameter">screen</span>
-         (string) The key of the screen to switch to.
+            <span class="types"><a class="type" href="https://www.lua.org/manual/5.2/manual.html#6.4">string</a></span>
+
+                 The key of the screen to switch to.
         </li>
         <li><span class="parameter">...</span>
-            (vararg) One or multiple arguments passed to the new screen.
+            <span class="types"><span class="type">vararg</span></span>
+
+                 One or multiple arguments passed to the new screen's init
+                 function.
+
+         (<em>optional</em>)
         </li>
     </ul>
 
@@ -256,22 +303,28 @@
 </dd>
     <dt>
     <a name = "push"></a>
-    <strong>push (screen, ...)</strong>
+    <strong>push (screen[, ...])</strong>
     </dt>
     <dd>
     Pushes a new screen to the stack.
- Creates a new screen and pushes it on the screen stack, where it will overlay
- the other screens below it. Screens below the this new screen will be set
- inactive.
+ Creates a new screen and pushes it onto the stack, where it will overlay the
+ other screens below it. Screens below this new screen will be set inactive.
 
 
     <h3>Parameters:</h3>
     <ul>
         <li><span class="parameter">screen</span>
-         (string) The key of the screen to push to the stack.
+            <span class="types"><a class="type" href="https://www.lua.org/manual/5.2/manual.html#6.4">string</a></span>
+
+                 The key of the screen to push to the stack.
         </li>
         <li><span class="parameter">...</span>
-            (vararg) One or multiple arguments passed to the new screen.
+            <span class="types"><span class="type">vararg</span></span>
+
+                 One or multiple arguments passed to the new screen's init
+                 function.
+
+         (<em>optional</em>)
         </li>
     </ul>
 
@@ -292,7 +345,10 @@
     <h3>Returns:</h3>
     <ol>
 
-        (table) The screen on top of the stack.
+           <span class="types"><a class="type" href="https://www.lua.org/manual/5.2/manual.html#6.5">table</a></span>
+
+                 The screen on top of the stack.
+
     </ol>
 
 
@@ -304,16 +360,13 @@
     <strong>pop ()</strong>
     </dt>
     <dd>
-    Removes and returns the topmost screen of the stack.
+    Removes the topmost screen of the stack.
 
 
 
-    <h3>Returns:</h3>
-    <ol>
 
-        (table) The screen on top of the stack.
-    </ol>
-
+    <h3>Raises:</h3>
+    Throws an error if the screen to pop is the last one on the stack.
 
 
 
@@ -1076,14 +1129,34 @@
 
 
 </dd>
+    <dt>
+    <a name = "registerCallbacks"></a>
+    <strong>registerCallbacks (callbacks)</strong>
+    </dt>
+    <dd>
+    Register to multiple LÖVE callbacks, defaults to all.
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">callbacks</span>
+         (table) Table with the names of the callbacks to register to.
+        </li>
+    </ul>
+
+
+
+
+
+</dd>
 </dl>
 
 
 </div> <!-- id="content" -->
 </div> <!-- id="main" -->
 <div id="about">
-<i>generated by <a href="http://github.com/stevedonovan/LDoc">LDoc 1.4.3</a></i>
-<i style="float:right;">Last updated 2016-01-30 03:19:01 </i>
+<i>generated by <a href="http://github.com/stevedonovan/LDoc">LDoc 1.4.6</a></i>
+<i style="float:right;">Last updated 2017-03-22 01:58:21 </i>
 </div> <!-- id="about" -->
 </div> <!-- id="container" -->
 </body>
