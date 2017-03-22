@@ -120,7 +120,10 @@ end
 -- ------------------------------------------------
 
 ---
--- If there was a change of screen, change it immediatly
+-- This function is used internally by the ScreenManager library.
+-- It performs all changes that have been added to the changes queue (FIFO) and
+-- resets the queue afterwards.
+-- @see push, pop, switch
 --
 function ScreenManager.performChanges()
     if #changes == 0 then
@@ -142,15 +145,19 @@ function ScreenManager.performChanges()
 end
 
 ---
--- Initialise the ScreenManager.
--- Sets up the ScreenManager and pushes the first screen.
--- @param nscreens (table)  A table containing pointers to the different screen
---                           classes. The keys will are used to call a specific
---                           screen.
--- @param screen   (string) The key of the first screen to push to the stack.
---                           Use the key under which the screen in question is
---                           stored in the nscreens table.
--- @param ...      (vararg) One or multiple arguments passed to the new screen.
+-- Initialises the ScreenManager library.
+-- It sets up the stack table, the list of screens to use and then proceeds with
+-- validating and switching to the initial screen.
+-- @tparam table nscreens
+--                 A table containing pointers to the different screen classes.
+--                 The keys will are used to call a specific screen.
+-- @tparam string screen
+--                 The key of the first screen to push to the stack. Use the
+--                 key under which the screen in question is stored in the
+--                 nscreens table.
+-- @tparam[opt] vararg ...
+--                 Aditional arguments which will be passed to the new
+--                 screen's init function.
 --
 function ScreenManager.init( nscreens, screen, ... )
     stack = {}
@@ -166,8 +173,11 @@ end
 -- Switches to a screen.
 -- Removes all screens from the stack, creates a new screen and switches to it.
 -- Use this if you don't want to stack onto other screens.
--- @param screen (string) The key of the screen to switch to.
--- @param ...    (vararg) One or multiple arguments passed to the new screen.
+-- @tparam string screen
+--                 The key of the screen to switch to.
+-- @tparam[opt] vararg ...
+--                 One or multiple arguments passed to the new screen's init
+--                 function.
 --
 function ScreenManager.switch( screen, ... )
     validateScreen( screen )
@@ -177,11 +187,13 @@ end
 
 ---
 -- Pushes a new screen to the stack.
--- Creates a new screen and pushes it on the screen stack, where it will overlay
--- the other screens below it. Screens below the this new screen will be set
--- inactive.
--- @param screen (string) The key of the screen to push to the stack.
--- @param ...    (vararg) One or multiple arguments passed to the new screen.
+-- Creates a new screen and pushes it onto the stack, where it will overlay the
+-- other screens below it. Screens below this new screen will be set inactive.
+-- @tparam string screen
+--                 The key of the screen to push to the stack.
+-- @tparam[opt] vararg ...
+--                 One or multiple arguments passed to the new screen's init
+--                 function.
 --
 function ScreenManager.push( screen, ... )
     validateScreen( screen )
@@ -191,7 +203,8 @@ end
 
 ---
 -- Returns the screen on top of the screen stack without removing it.
--- @return (table) The screen on top of the stack.
+-- @treturn table
+--                 The screen on top of the stack.
 --
 function ScreenManager.peek()
     return stack[#stack]
@@ -199,6 +212,7 @@ end
 
 ---
 -- Removes the topmost screen of the stack.
+-- @raise Throws an error if the screen to pop is the last one on the stack.
 --
 function ScreenManager.pop()
     if height > 1 then
