@@ -63,3 +63,7 @@ end
 
 return MainScreen
 ```
+
+## Documentation
+
+An online documentation is available [here](http://rm-code.github.io/screenmanager/).
