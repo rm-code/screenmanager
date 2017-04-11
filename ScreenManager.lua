@@ -223,6 +223,19 @@ function ScreenManager.pop()
     end
 end
 
+---
+-- Publishes a message to all screens which have a public receive function.
+-- @tparam string event A string by which the message can be identified.
+-- @tparam varargs ...  Multiple parameters to push to the receiver.
+--
+function ScreenManager.publish( event, ... )
+    for i = 1, #stack do
+        if stack[i].receive then
+            stack[i]:receive( event, ... )
+        end
+    end
+end
+
 -- ------------------------------------------------
 -- LOVE Callbacks
 -- ------------------------------------------------
