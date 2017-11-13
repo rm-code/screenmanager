@@ -60,6 +60,7 @@ function Screen.new()
 
     self.init = null
     self.close = null
+    self.receive = null
     self.directorydropped = null
     self.draw = null
     self.filedropped = null
