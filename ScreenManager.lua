@@ -26,7 +26,7 @@
 -- @module ScreenManager
 --
 local ScreenManager = {
-    _VERSION     = '2.0.1',
+    _VERSION     = '2.1.0',
     _DESCRIPTION = 'Screen/State Management for the LÖVE framework',
     _URL         = 'https://github.com/rm-code/screenmanager/',
 }
