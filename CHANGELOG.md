@@ -1,3 +1,10 @@
+## Version 2.1.1 ( 2017-11-14 )
+- Updated code to increase performance and reduce garbage production
+
+## Version 2.1.0 ( 2017-11-14 )
+- Added ScreenManager.publish which allows sending events to other screens on the stack
+- Updated error message for invalid screens
+
 ## Version 2.0.1 ( 2017-02-19 )
 - Changed init function to perform a switch action
 - Fix draw and update callbacks not being registered when not providing a callback table
