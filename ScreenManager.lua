@@ -126,11 +126,10 @@ end
 -- @see push, pop, switch
 --
 function ScreenManager.performChanges()
-    if #changes == 0 then
-        return
-    end
+    for i=1, #changes do
+        local change = changes[i]
+        changes[i] = nil
 
-    for _, change in ipairs( changes ) do
         if change.action == 'pop' then
             pop()
         elseif change.action == 'switch' then
@@ -140,8 +139,6 @@ function ScreenManager.performChanges()
             push( change.screen, change.args )
         end
     end
-
-    changes = {}
 end
 
 ---
