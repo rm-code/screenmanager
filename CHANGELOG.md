@@ -1,3 +1,6 @@
+## Version 2.1.1 ( 2017-11-14 )
+- Updated code to increase performance and reduce garbage production
+
 ## Version 2.1.0 ( 2017-11-14 )
 - Added ScreenManager.publish which allows sending events to other screens on the stack
 - Updated error message for invalid screens
