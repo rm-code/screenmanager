@@ -49,12 +49,27 @@ You will have to add a new one to your screen list or use one of the existing sc
 local stack
 local screens
 
+local old_changes = setmetatable( {}, { __mode = 'v' } )
 local changes = {}
 local height = 0 --Stack height
 
 -- ------------------------------------------------
 -- Private Functions
 -- ------------------------------------------------
+
+---
+-- Cleans a table and fills it with the passed arguments
+--
+local function refill( t, ... )
+    local n = select( '#', ... )
+
+    for i=1, math.max( t.n, n ) do
+        t[i] = select( i, ... )
+    end
+
+    t.n = n
+    return t
+end
 
 ---
 -- Close and remove all screens from the stack.
@@ -126,11 +141,10 @@ end
 -- @see push, pop, switch
 --
 function ScreenManager.performChanges()
-    if #changes == 0 then
-        return
-    end
+    for i=1, #changes do
+        local change = changes[i]
+        changes[i] = nil
 
-    for _, change in ipairs( changes ) do
         if change.action == 'pop' then
             pop()
         elseif change.action == 'switch' then
@@ -139,9 +153,9 @@ function ScreenManager.performChanges()
         elseif change.action == 'push' then
             push( change.screen, change.args )
         end
-    end
 
-    changes = {}
+        old_changes[#old_changes + 1] = change
+    end
 end
 
 ---
@@ -182,7 +196,15 @@ end
 function ScreenManager.switch( screen, ... )
     validateScreen( screen )
     height = 1
-    changes[#changes + 1] = { action = 'switch', screen = screen, args = { ... } }
+
+    local change = old_changes[#old_changes] or {}
+    old_changes[#old_changes] = nil
+
+    change.action = 'switch'
+    change.screen = screen
+    change.args = refill( change.args or { n = 0 }, ... )
+
+    changes[#changes + 1] = change
 end
 
 ---
@@ -198,7 +220,15 @@ end
 function ScreenManager.push( screen, ... )
     validateScreen( screen )
     height = height + 1
-    changes[#changes + 1] = { action = 'push', screen = screen, args = { ... } }
+
+    local change = old_changes[#old_changes] or {}
+    old_changes[#old_changes] = nil
+
+    change.action = 'push'
+    change.screen = screen
+    change.args = refill( change.args or { n = 0 }, ... )
+
+    changes[#changes + 1] = change
 end
 
 ---
@@ -217,7 +247,13 @@ end
 function ScreenManager.pop()
     if height > 1 then
         height = height - 1
-        changes[#changes + 1] = { action = 'pop' }
+
+        local change = old_changes[#old_changes] or {}
+        old_changes[#old_changes] = nil
+
+        change.action = 'pop'
+
+        changes[#changes + 1] = change
     else
         error("Can't close the last screen. Use switch() to clear the screen manager and add a new screen.", 2)
     end
